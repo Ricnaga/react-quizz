@@ -12,10 +12,10 @@ import {
 } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { HOME } from "../../application/routes/paths";
-import { questions, answers } from "./questions";
+import { questions, answers } from "../../config/questions";
 import { StressScore } from "./StressScore";
 
-const PAGESIZE = 6;
+const PAGESIZE = 1;
 
 export type QuestionsType = Array<{
   title: string;
@@ -110,6 +110,7 @@ export function QuestionsFormScreen() {
           email={email}
           nome={nome}
           whatsapp={whatsapp}
+          onClose={() => setScoreAsOpen(false)}
         />
       </Dialog>
     </Grid>

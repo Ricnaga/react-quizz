@@ -1,14 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { api } from "../../application/api/axios";
 import { QuestionsType } from "./QuestionsForm";
-
-type StressScoreProps = {
-  items: QuestionsType;
-  email: string;
-  nome: string;
-  whatsapp: string;
-};
 
 type ScoreMessageProps = Record<"resultado", number>;
 
@@ -59,25 +52,35 @@ function ScoreMessage({ resultado }: ScoreMessageProps) {
   );
 }
 
+type StressScoreProps = {
+  items: QuestionsType;
+  email: string;
+  nome: string;
+  whatsapp: string;
+  onClose: () => void;
+};
+
 export function StressScore({
   items,
   email,
   nome,
   whatsapp,
+  onClose,
 }: StressScoreProps) {
   const resultado = items.reduce(
     (accumulator, item) =>
       item.answerValue ? accumulator + item.answerValue : accumulator,
     0
   );
-  useEffect(() => {
-    api.post("/register", {
+  const handleClick = async () => {
+    onClose();
+    return api.post("/register", {
       email,
       nome,
       whatsapp,
       resultado: resultado.toString(),
     });
-  }, []);
+  };
 
   return (
     <Grid
@@ -88,8 +91,10 @@ export function StressScore({
       direction="column"
     >
       <Typography variant="h3">Resultado</Typography>
-
       <ScoreMessage resultado={resultado} />
+      <Button onClick={handleClick} variant="contained" size="large">
+        Salvar
+      </Button>
     </Grid>
   );
 }
