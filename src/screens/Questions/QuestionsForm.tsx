@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { Button, Card, Container, Form, Modal } from "react-bootstrap";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
-import { HOME } from "../../routes/paths";
+import {
+  Button,
+  Card,
+  Container,
+  Dialog,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { HOME } from "../../application/routes/paths";
 import { questions, answers } from "./questions";
 import { StressScore } from "./StressScore";
 
@@ -19,6 +28,9 @@ export function QuestionsFormScreen() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pageNumber = parseInt(searchParams.get("page") ?? "1", 10);
+  const email = searchParams.get("email") ?? "";
+  const nome = searchParams.get("nome") ?? "";
+  const whatsapp = searchParams.get("whatsapp") ?? "";
 
   const initialQuestion = (pageNumber - 1) * PAGESIZE;
   const nextQuestions = initialQuestion + PAGESIZE;
@@ -26,12 +38,17 @@ export function QuestionsFormScreen() {
 
   const handlePreviousPage = () => {
     const previousPage = (pageNumber - 1).toString();
-    setSearchParams({ page: previousPage });
+    setSearchParams({ page: previousPage, email, nome, whatsapp });
   };
 
-  const handleNextPage = () => {
-    const nextPage = (pageNumber + 1).toString();
-    setSearchParams({ page: nextPage });
+  const handleNextPage = async () => {
+    if (!isEndQuestions) {
+      const nextPage = (pageNumber + 1).toString();
+      setSearchParams({ page: nextPage, email, nome, whatsapp });
+      return;
+    }
+
+    setScoreAsOpen(true);
   };
 
   const handleChangeAnswer = (questionTitle: string, answerNumber: number) =>
@@ -45,41 +62,46 @@ export function QuestionsFormScreen() {
 
   return (
     <Container className="container w-50">
-      <Card.Title>Questionário {pageNumber} (QNADE)</Card.Title>
+      <Card>Questionário {pageNumber} (QNADE)</Card>
       {items
         .slice(initialQuestion, nextQuestions)
         .map(({ title, answerValue }) => (
           <Card key={title}>
-            <Card.Title>- {title}</Card.Title>
-            {answers.map((answer, index) => (
-              <Form.Check
-                checked={answerValue === index}
-                key={answer}
-                type="radio"
-                name={title}
-                label={`${index} - ${answer}`}
-                onChange={() => handleChangeAnswer(title, index)}
-              />
-            ))}
+            <Card>- {title}</Card>
+            <FormControl>
+              <RadioGroup>
+                {answers.map((answer, index) => (
+                  <FormControlLabel
+                    key={answer}
+                    checked={answerValue === index}
+                    control={<Radio />}
+                    label={`${index} - ${answer}`}
+                    onChange={() => handleChangeAnswer(title, index)}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
           </Card>
         ))}
 
       <Button
+        variant="outlined"
         onClick={() => (pageNumber > 1 ? handlePreviousPage() : navigate(HOME))}
       >
         Voltar
       </Button>
 
-      <Button
-        onClick={() =>
-          isEndQuestions ? setScoreAsOpen(true) : handleNextPage()
-        }
-      >
+      <Button onClick={handleNextPage} variant="contained">
         {isEndQuestions ? "Enviar" : "Próxima"}
       </Button>
-      <Modal show={isOpenScore} onHide={() => setScoreAsOpen(false)}>
-        <StressScore items={items} />
-      </Modal>
+      <Dialog open={isOpenScore} onClose={() => setScoreAsOpen(false)}>
+        <StressScore
+          items={items}
+          email={email}
+          nome={nome}
+          whatsapp={whatsapp}
+        />
+      </Dialog>
     </Container>
   );
 }

@@ -1,6 +1,10 @@
-import "bootstrap/dist/css/bootstrap.css";
-import { RouterContext } from "./routes/context";
+import { CssBaseline } from "@mui/material";
+import { RouterContext } from "./application/routes/context";
 
 export function App() {
-  return <RouterContext />;
+  return (
+    <RouterContext>
+      <CssBaseline />
+    </RouterContext>
+  );
 }
