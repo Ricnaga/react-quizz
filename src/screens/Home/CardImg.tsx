@@ -4,10 +4,10 @@ import scoreImg from "../../assets/score.jpg";
 export function CardImg() {
   return (
     <>
-      <Card>
+      <Card sx={{ padding: "2rem", margin: "2rem" }}>
         <img src={scoreImg} />
       </Card>
-      <Card>
+      <Card sx={{ padding: "2rem", margin: "2rem" }}>
         <strong>AVISO:</strong> Este instrumento é de uso clínico para adultos,
         portanto não deverá ser utilizado{" "}
         <strong>

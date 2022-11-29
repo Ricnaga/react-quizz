@@ -15,7 +15,7 @@ type CardFormProps = {
 
 function CardEmail({ name, onChange }: CardFormProps) {
   return (
-    <Card>
+    <Card sx={{ padding: "2rem", margin: "2rem" }}>
       <TextField
         fullWidth
         type="email"
@@ -31,7 +31,7 @@ function CardEmail({ name, onChange }: CardFormProps) {
 
 function CardName({ name, onChange }: CardFormProps) {
   return (
-    <Card>
+    <Card sx={{ padding: "2rem", margin: "2rem" }}>
       <TextField
         fullWidth
         type="text"
@@ -47,7 +47,7 @@ function CardName({ name, onChange }: CardFormProps) {
 
 function CardPhone({ name, onChange }: CardFormProps) {
   return (
-    <Card>
+    <Card sx={{ padding: "2rem", margin: "2rem" }}>
       <TextField
         fullWidth
         type="text"
@@ -67,7 +67,7 @@ function CardPhone({ name, onChange }: CardFormProps) {
 
 function CardUnderAge() {
   return (
-    <Card>
+    <Card sx={{ padding: "2rem", margin: "2rem" }}>
       <FormControl>
         <RadioGroup>
           <FormControlLabel

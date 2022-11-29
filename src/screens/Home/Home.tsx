@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Button, Grid } from "@mui/material";
+import { Button, Card, Grid } from "@mui/material";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import { QUESTIONS } from "../../application/routes/paths";
 import { CardDescription } from "./CardDescription";
@@ -36,9 +36,11 @@ export function HomeScreen() {
         <CardForm.Name name="nome" onChange={formik.handleChange} />
         <CardForm.Phone name="whatsapp" onChange={formik.handleChange} />
         <CardForm.UnderAge />
-        <Button type="submit" variant="contained">
-          Próxima
-        </Button>
+        <Card sx={{ padding: "2rem", margin: "2rem" }}>
+          <Button type="submit" variant="contained">
+            Próxima
+          </Button>
+        </Card>
       </form>
     </Grid>
   );

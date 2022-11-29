@@ -2,12 +2,13 @@ import { useState } from "react";
 import {
   Button,
   Card,
-  Container,
+  Grid,
   Dialog,
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { HOME } from "../../application/routes/paths";
@@ -63,13 +64,17 @@ export function QuestionsFormScreen() {
     );
 
   return (
-    <Container className="container w-50">
-      <Card>Questionário {pageNumber} (QNADE)</Card>
+    <Grid paddingX={50} paddingY={4}>
+      <Typography variant="h4" fontWeight={700} marginBottom={1} align="center">
+        Questionário {pageNumber} (QNADE)
+      </Typography>
       {items
         .slice(initialQuestion, nextQuestions)
         .map(({ title, answerValue }) => (
-          <Card key={title}>
-            <Card>- {title}</Card>
+          <Card key={title} sx={{ padding: "2rem", margin: "2rem" }}>
+            <Typography variant="h5" fontWeight={700} marginBottom={1}>
+              - {title}
+            </Typography>
             <FormControl>
               <RadioGroup>
                 {answers.map((answer, index) => (
@@ -85,17 +90,20 @@ export function QuestionsFormScreen() {
             </FormControl>
           </Card>
         ))}
+      <Grid container justifyContent="space-around">
+        <Button
+          variant="outlined"
+          onClick={() =>
+            pageNumber > 1 ? handlePreviousPage() : navigate(HOME)
+          }
+        >
+          Voltar
+        </Button>
 
-      <Button
-        variant="outlined"
-        onClick={() => (pageNumber > 1 ? handlePreviousPage() : navigate(HOME))}
-      >
-        Voltar
-      </Button>
-
-      <Button onClick={handleNextPage} variant="contained">
-        {isEndQuestions ? "Enviar" : "Próxima"}
-      </Button>
+        <Button onClick={handleNextPage} variant="contained">
+          {isEndQuestions ? "Enviar" : "Próxima"}
+        </Button>
+      </Grid>
       <Dialog open={isOpenScore} onClose={() => setScoreAsOpen(false)}>
         <StressScore
           items={items}
@@ -104,6 +112,6 @@ export function QuestionsFormScreen() {
           whatsapp={whatsapp}
         />
       </Dialog>
-    </Container>
+    </Grid>
   );
 }
