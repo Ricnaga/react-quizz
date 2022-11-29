@@ -16,7 +16,6 @@ export function HomeScreen() {
       whatsapp: "",
     },
     onSubmit: (values) => {
-      console.log(createSearchParams);
       navigate({
         pathname: QUESTIONS,
         search: createSearchParams({

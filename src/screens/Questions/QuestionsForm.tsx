@@ -24,7 +24,9 @@ export type QuestionsType = Array<{
 export function QuestionsFormScreen() {
   const navigate = useNavigate();
   const [isOpenScore, setScoreAsOpen] = useState<boolean>(false);
-  const [items, setItems] = useState<QuestionsType>(questions);
+  const [items, setItems] = useState<QuestionsType>(
+    questions.map((question) => ({ title: question, answerValue: null }))
+  );
   const [searchParams, setSearchParams] = useSearchParams();
 
   const pageNumber = parseInt(searchParams.get("page") ?? "1", 10);
