@@ -1,10 +1,10 @@
-import { CssBaseline } from "@mui/material";
 import { RouterContext } from "./application/routes/context";
+import { MuiContext } from "./application/theme";
 
 export function App() {
   return (
-    <RouterContext>
-      <CssBaseline />
-    </RouterContext>
+    <MuiContext>
+      <RouterContext />
+    </MuiContext>
   );
 }
