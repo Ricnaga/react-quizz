@@ -6,11 +6,12 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { answers } from "../../config/questions";
+import { answers } from "../../config/data";
+import { CardStyled } from "./Home";
 
 export function CardDescription() {
   return (
-    <Card sx={{ padding: "2rem", margin: "2rem" }}>
+    <CardStyled>
       <Typography variant="h4" fontWeight={700}>
         Questionário para medir o Nível de Ansiedade, Depressão e Estresse
         (QNADE)
@@ -103,6 +104,6 @@ export function CardDescription() {
         Este teste foi retirado do site Núcleo de Atenção ao Desenvolvimento
         Humano
       </Typography>
-    </Card>
+    </CardStyled>
   );
 }

@@ -1,40 +1,64 @@
+import { ErrorOutline } from "@mui/icons-material";
 import {
-  Card,
   FormControl,
   FormControlLabel,
+  Grid,
   Radio,
   RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
+import { ChangeEvent, SyntheticEvent } from "react";
+import { CardStyled } from "./Home";
 
 type CardFormProps = {
   name: string;
-  onChange: (e: React.ChangeEvent) => void;
+  error?: string;
+  onChange: (e: ChangeEvent | SyntheticEvent) => void;
 };
 
-function CardEmail({ name, onChange }: CardFormProps) {
+type CardErrorMessageProps = Record<"error", string>;
+
+function CardErrorMessage({ error }: CardErrorMessageProps) {
   return (
-    <Card sx={{ padding: "2rem", margin: "2rem" }}>
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="flex-start"
+      marginTop={2}
+    >
+      <ErrorOutline color="error" />
+      <Typography variant="subtitle2" color="red" marginLeft={1}>
+        {error}
+      </Typography>
+    </Grid>
+  );
+}
+
+function CardEmail({ name, onChange, error }: CardFormProps) {
+  return (
+    <CardStyled>
       <TextField
+        size="small"
+        error={!!error}
         fullWidth
         type="email"
         label="E-mail"
-        required
         placeholder="Seu e-mail"
         name={name}
         onChange={onChange}
       />
-      {/* <Form.Text muted>Esta pergunta é obrigatória</Form.Text> */}
-    </Card>
+      {error && <CardErrorMessage error={error} />}
+    </CardStyled>
   );
 }
 
-function CardName({ name, onChange }: CardFormProps) {
+function CardName({ name, onChange, error }: CardFormProps) {
   return (
-    <Card sx={{ padding: "2rem", margin: "2rem" }}>
+    <CardStyled>
       <TextField
-        required
+        size="small"
+        error={!!error}
         fullWidth
         type="text"
         label="Nome:"
@@ -42,16 +66,17 @@ function CardName({ name, onChange }: CardFormProps) {
         name={name}
         onChange={onChange}
       />
-      {/* <Form.Text muted>Esta pergunta é obrigatória</Form.Text> */}
-    </Card>
+      {error && <CardErrorMessage error={error} />}
+    </CardStyled>
   );
 }
 
-function CardPhone({ name, onChange }: CardFormProps) {
+function CardPhone({ name, onChange, error }: CardFormProps) {
   return (
-    <Card sx={{ padding: "2rem", margin: "2rem" }}>
+    <CardStyled>
       <TextField
-        required
+        size="small"
+        error={!!error}
         fullWidth
         type="text"
         label={
@@ -63,33 +88,40 @@ function CardPhone({ name, onChange }: CardFormProps) {
         name={name}
         onChange={onChange}
       />
-      {/* <Form.Text muted>Esta pergunta é obrigatória</Form.Text> */}
-    </Card>
+      {error && <CardErrorMessage error={error} />}
+    </CardStyled>
   );
 }
 
-function CardUnderAge() {
+function CardUnderAge({ name, onChange, error }: CardFormProps) {
+  const radioValue = [
+    {
+      value: true,
+      text: "Sim, sou maior de 18 anos",
+    },
+    {
+      value: false,
+      text: "Não",
+    },
+  ];
   return (
-    <Card sx={{ padding: "2rem", margin: "2rem" }}>
+    <CardStyled>
       <FormControl>
         <RadioGroup>
-          <FormControlLabel
-            value="overAge"
-            control={<Radio />}
-            label={
-              <Typography variant="subtitle1">
-                Sim, sou maior de 18 anos
-              </Typography>
-            }
-          />
-          <FormControlLabel
-            value="underAge"
-            control={<Radio />}
-            label={<Typography variant="subtitle1">Não</Typography>}
-          />
+          {radioValue.map((radio) => (
+            <FormControlLabel
+              key={radio.text}
+              name={name}
+              value={radio.value}
+              onChange={onChange}
+              control={<Radio />}
+              label={<Typography variant="subtitle1">{radio.text}</Typography>}
+            />
+          ))}
         </RadioGroup>
       </FormControl>
-    </Card>
+      {error && <CardErrorMessage error={error} />}
+    </CardStyled>
   );
 }
 
