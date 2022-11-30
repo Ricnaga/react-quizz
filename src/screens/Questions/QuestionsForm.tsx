@@ -8,10 +8,11 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  styled,
 } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { HOME, RESULT } from "../../application/routes/paths";
-import { questions, answers } from "../../config/questions";
+import { HOME, SCORE } from "../../application/routes/paths";
+import { questions, answers, STORAGE_KEY } from "../../config/data";
 
 const PAGESIZE = 1;
 
@@ -22,7 +23,6 @@ export type QuestionsType = Array<{
 
 export function QuestionsFormScreen() {
   const navigate = useNavigate();
-  const [isOpenScore, setScoreAsOpen] = useState<boolean>(false);
   const [items, setItems] = useState<QuestionsType>(
     questions.map((question) => ({ title: question, answerValue: null }))
   );
@@ -48,18 +48,21 @@ export function QuestionsFormScreen() {
       setSearchParams({ page: nextPage, email, nome, whatsapp });
       return;
     }
-    const resultado = items.reduce(
-      (accumulator, item) =>
-        item.answerValue ? accumulator + item.answerValue : accumulator,
-      0
-    );
 
     localStorage.setItem(
-      "userData",
-      JSON.stringify({ email, nome, whatsapp, resultado })
+      STORAGE_KEY,
+      JSON.stringify({
+        email,
+        nome,
+        whatsapp,
+        resultado: items.reduce(
+          (accumulator, item) =>
+            item.answerValue ? accumulator + item.answerValue : accumulator,
+          0
+        ),
+      })
     );
-    navigate(RESULT);
-    // setScoreAsOpen(true);
+    navigate(SCORE);
   };
 
   const handleChangeAnswer = (questionTitle: string, answerNumber: number) =>
@@ -72,9 +75,7 @@ export function QuestionsFormScreen() {
     );
 
   return (
-    <Card
-      sx={{ diplay: "grid", alignItems: "center", backgroundColor: "#ffc3c3" }}
-    >
+    <GridStyled>
       <Typography variant="h6" fontWeight={700} marginBottom={1} align="center">
         Questionário {pageNumber} (QNADE)
       </Typography>
@@ -101,7 +102,7 @@ export function QuestionsFormScreen() {
             </FormControl>
           </Card>
         ))}
-      <Grid container justifyContent="space-around">
+      <Grid container justifyContent="space-around" marginBottom={4}>
         <Button
           variant="outlined"
           onClick={() =>
@@ -115,6 +116,12 @@ export function QuestionsFormScreen() {
           {isEndQuestions ? "Enviar" : "Próxima"}
         </Button>
       </Grid>
-    </Card>
+    </GridStyled>
   );
 }
+
+export const GridStyled = styled(Grid)(({ theme }) => ({
+  [theme.breakpoints.up("sm")]: {
+    padding: theme.spacing(2, 50),
+  },
+}));
