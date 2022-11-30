@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   Grid,
-  Dialog,
   FormControl,
   FormControlLabel,
   Radio,
@@ -11,9 +10,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { HOME } from "../../application/routes/paths";
+import { HOME, RESULT } from "../../application/routes/paths";
 import { questions, answers } from "../../config/questions";
-import { StressScore } from "./StressScore";
 
 const PAGESIZE = 1;
 
@@ -50,8 +48,18 @@ export function QuestionsFormScreen() {
       setSearchParams({ page: nextPage, email, nome, whatsapp });
       return;
     }
+    const resultado = items.reduce(
+      (accumulator, item) =>
+        item.answerValue ? accumulator + item.answerValue : accumulator,
+      0
+    );
 
-    setScoreAsOpen(true);
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({ email, nome, whatsapp, resultado })
+    );
+    navigate(RESULT);
+    // setScoreAsOpen(true);
   };
 
   const handleChangeAnswer = (questionTitle: string, answerNumber: number) =>
@@ -64,8 +72,10 @@ export function QuestionsFormScreen() {
     );
 
   return (
-    <Grid paddingX={50} paddingY={4}>
-      <Typography variant="h4" fontWeight={700} marginBottom={1} align="center">
+    <Card
+      sx={{ diplay: "grid", alignItems: "center", backgroundColor: "#ffc3c3" }}
+    >
+      <Typography variant="h6" fontWeight={700} marginBottom={1} align="center">
         Questionário {pageNumber} (QNADE)
       </Typography>
       {items
@@ -79,6 +89,7 @@ export function QuestionsFormScreen() {
               <RadioGroup>
                 {answers.map((answer, index) => (
                   <FormControlLabel
+                    sx={{ padding: "1rem" }}
                     key={answer}
                     checked={answerValue === index}
                     control={<Radio />}
@@ -104,15 +115,6 @@ export function QuestionsFormScreen() {
           {isEndQuestions ? "Enviar" : "Próxima"}
         </Button>
       </Grid>
-      <Dialog open={isOpenScore} onClose={() => setScoreAsOpen(false)}>
-        <StressScore
-          items={items}
-          email={email}
-          nome={nome}
-          whatsapp={whatsapp}
-          onClose={() => setScoreAsOpen(false)}
-        />
-      </Dialog>
-    </Grid>
+    </Card>
   );
 }

@@ -4,7 +4,6 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import { QUESTIONS } from "../../application/routes/paths";
 import { CardDescription } from "./CardDescription";
 import { CardForm } from "./CardForm";
-import { CardImg } from "./CardImg";
 
 export function HomeScreen() {
   const navigate = useNavigate();
@@ -28,11 +27,12 @@ export function HomeScreen() {
   });
 
   return (
-    <Grid paddingX={50} paddingY={4}>
+    <Card
+      sx={{ diplay: "grid", alignItems: "center", backgroundColor: "#ffc3c3" }}
+    >
       <CardDescription />
       <form onSubmit={formik.handleSubmit}>
         <CardForm.Email name="email" onChange={formik.handleChange} />
-        <CardImg />
         <CardForm.Name name="nome" onChange={formik.handleChange} />
         <CardForm.Phone name="whatsapp" onChange={formik.handleChange} />
         <CardForm.UnderAge />
@@ -42,6 +42,6 @@ export function HomeScreen() {
           </Button>
         </Card>
       </form>
-    </Grid>
+    </Card>
   );
 }

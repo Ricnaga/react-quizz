@@ -20,6 +20,7 @@ function CardEmail({ name, onChange }: CardFormProps) {
         fullWidth
         type="email"
         label="E-mail"
+        required
         placeholder="Seu e-mail"
         name={name}
         onChange={onChange}
@@ -33,6 +34,7 @@ function CardName({ name, onChange }: CardFormProps) {
   return (
     <Card sx={{ padding: "2rem", margin: "2rem" }}>
       <TextField
+        required
         fullWidth
         type="text"
         label="Nome:"
@@ -49,6 +51,7 @@ function CardPhone({ name, onChange }: CardFormProps) {
   return (
     <Card sx={{ padding: "2rem", margin: "2rem" }}>
       <TextField
+        required
         fullWidth
         type="text"
         label={
