@@ -32,4 +32,3 @@ export const answers = [
     'Apresentei esses sintomas com forte intensidade e/ou na maior parte do tempo.',
     'Apresentei esses sintomas de forma insuportável e/ou todo o tempo.',
 ]
-export const STORAGE_KEY = 'quizz-data'

@@ -10,9 +10,13 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  createSearchParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { HOME, SCORE } from "../../application/routes/paths";
-import { questions, answers, STORAGE_KEY } from "../../config/data";
+import { questions, answers } from "../../config/data";
 
 const PAGESIZE = 1;
 
@@ -49,20 +53,23 @@ export function QuestionsFormScreen() {
       return;
     }
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
+    const resultado = items
+      .reduce(
+        (accumulator, item) =>
+          item.answerValue ? accumulator + item.answerValue : accumulator,
+        0
+      )
+      .toString();
+
+    navigate({
+      pathname: SCORE,
+      search: createSearchParams({
         email,
         nome,
         whatsapp,
-        resultado: items.reduce(
-          (accumulator, item) =>
-            item.answerValue ? accumulator + item.answerValue : accumulator,
-          0
-        ),
-      })
-    );
-    navigate(SCORE);
+        resultado,
+      }).toString(),
+    });
   };
 
   const handleChangeAnswer = (questionTitle: string, answerNumber: number) =>
@@ -82,7 +89,7 @@ export function QuestionsFormScreen() {
       {items
         .slice(initialQuestion, nextQuestions)
         .map(({ title, answerValue }) => (
-          <Card key={title} sx={{ padding: "2rem", margin: "2rem" }}>
+          <CardStyled key={title}>
             <Typography variant="h5" fontWeight={700} marginBottom={1}>
               - {title}
             </Typography>
@@ -100,7 +107,7 @@ export function QuestionsFormScreen() {
                 ))}
               </RadioGroup>
             </FormControl>
-          </Card>
+          </CardStyled>
         ))}
       <Grid container justifyContent="space-around" marginBottom={4}>
         <Button
@@ -124,4 +131,9 @@ export const GridStyled = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(2, 50),
   },
+}));
+
+const CardStyled = styled(Card)(({ theme }) => ({
+  padding: theme.spacing(4),
+  margin: theme.spacing(4),
 }));
