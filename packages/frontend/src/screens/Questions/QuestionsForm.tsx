@@ -18,39 +18,48 @@ import {
 import { HOME, SCORE } from "../../application/routes/paths";
 import { questions, answers } from "../../config/data";
 
-const PAGESIZE = 1;
-
-export type QuestionsType = Array<{
+type QuestionsType = Array<{
   title: string;
   answerValue: null | number;
 }>;
 
+const PAGESIZE = 1;
+
+const FORMATTED_QUESTIONS = questions.map((title) => ({
+  title,
+  answerValue: null,
+}));
+
 export function QuestionsFormScreen() {
   const navigate = useNavigate();
-  const [items, setItems] = useState<QuestionsType>(
-    questions.map((question) => ({ title: question, answerValue: null }))
-  );
   const [searchParams, setSearchParams] = useSearchParams();
+  const [items, setItems] = useState<QuestionsType>(FORMATTED_QUESTIONS);
 
   const pageNumber = parseInt(searchParams.get("page") ?? "1", 10);
-  const email = searchParams.get("email") ?? "";
-  const nome = searchParams.get("nome") ?? "";
-  const whatsapp = searchParams.get("whatsapp") ?? "";
+  const queryString = {
+    email: searchParams.get("email") as string,
+    nome: searchParams.get("nome") as string,
+    whatsapp: searchParams.get("whatsapp") as string,
+  };
 
-  const initialQuestion = (pageNumber - 1) * PAGESIZE;
-  const nextQuestions = initialQuestion + PAGESIZE;
-  const isEndQuestions = nextQuestions >= questions.length;
+  const firstQuestion = (pageNumber - 1) * PAGESIZE;
+  const lastQuestion = firstQuestion + PAGESIZE;
+  const isEndQuestions = lastQuestion >= questions.length;
 
   const handlePreviousPage = () => {
-    const previousPage = (pageNumber - 1).toString();
-    setSearchParams({ page: previousPage, email, nome, whatsapp });
+    const previousPage = pageNumber - 1;
+    return previousPage
+      ? setSearchParams({
+          ...queryString,
+          page: previousPage.toString(),
+        })
+      : navigate(HOME);
   };
 
   const handleNextPage = async () => {
     if (!isEndQuestions) {
       const nextPage = (pageNumber + 1).toString();
-      setSearchParams({ page: nextPage, email, nome, whatsapp });
-      return;
+      return setSearchParams({ ...queryString, page: nextPage });
     }
 
     const resultado = items
@@ -64,9 +73,7 @@ export function QuestionsFormScreen() {
     navigate({
       pathname: SCORE,
       search: createSearchParams({
-        email,
-        nome,
-        whatsapp,
+        ...queryString,
         resultado,
       }).toString(),
     });
@@ -87,7 +94,7 @@ export function QuestionsFormScreen() {
         Questionário {pageNumber} (QNADE)
       </Typography>
       {items
-        .slice(initialQuestion, nextQuestions)
+        .slice(firstQuestion, lastQuestion)
         .map(({ title, answerValue }) => (
           <CardStyled key={title}>
             <Typography variant="h5" fontWeight={700} marginBottom={1}>
@@ -110,12 +117,7 @@ export function QuestionsFormScreen() {
           </CardStyled>
         ))}
       <Grid container justifyContent="space-around" marginBottom={4}>
-        <Button
-          variant="outlined"
-          onClick={() =>
-            pageNumber > 1 ? handlePreviousPage() : navigate(HOME)
-          }
-        >
+        <Button variant="outlined" onClick={handlePreviousPage}>
           Voltar
         </Button>
 

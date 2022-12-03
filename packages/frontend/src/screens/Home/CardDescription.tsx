@@ -4,6 +4,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  styled,
   Typography,
 } from "@mui/material";
 import { answers } from "../../config/data";
@@ -12,10 +13,10 @@ import { CardStyled } from "./Home";
 export function CardDescription() {
   return (
     <CardStyled>
-      <Typography variant="h4" fontWeight={700}>
+      <TypographyStyled variant="h4">
         Questionário para medir o Nível de Ansiedade, Depressão e Estresse
         (QNADE)
-      </Typography>
+      </TypographyStyled>
       <Typography variant="body2" marginY={1}>
         O <strong>Questionário</strong> é composto de 24 perguntas e possui 2
         objetivos:
@@ -47,9 +48,7 @@ export function CardDescription() {
         Emergência, Prioridade, Atenção e Não Urgente.
       </Typography>
 
-      <Typography sx={{ display: "inline-block" }} fontWeight={700}>
-        Como preencher o formulário?
-      </Typography>
+      <TypographyStyled>Como preencher o formulário?</TypographyStyled>
 
       <Typography variant="body2" marginY={1}>
         Você deverá responder cada questões sobre os sintomas que apresentou{" "}
@@ -60,15 +59,11 @@ export function CardDescription() {
         Cada resposta tem uma pontuação na frente ex:{" "}
       </Typography>
 
-      <Typography sx={{ display: "inline-block" }} fontWeight={700} marginY={1}>
-        Pergunta:
-      </Typography>
+      <TypographyStyled>Pergunta:</TypographyStyled>
 
       <Typography variant="body2">Você sentiu .... ?</Typography>
 
-      <Typography sx={{ display: "inline-block" }} fontWeight={700} marginY={1}>
-        Resposta:
-      </Typography>
+      <TypographyStyled>Resposta:</TypographyStyled>
 
       {answers.map((answer, index) => (
         <Grid key={answer}>
@@ -79,15 +74,13 @@ export function CardDescription() {
         </Grid>
       ))}
 
-      <Typography sx={{ display: "inline-block" }} fontWeight={700} marginY={1}>
-        #ATENÇÃO#
-      </Typography>
-      <Typography sx={{ display: "inline-block" }} fontWeight={700} marginY={1}>
+      <TypographyStyled>#ATENÇÃO#</TypographyStyled>
+      <TypographyStyled>
         A resposta que você marcou, na frente dela tem um número, pode ser (0,1,
         2, 3 ou 4), o que precisa fazer é ir somando os pontos de cada resposta
         manualmente e no final terá o total de pontos para verificar o seu
         nível.
-      </Typography>
+      </TypographyStyled>
 
       <Typography variant="body2" marginY={1}>
         Assim que responder todas as perguntas você terá um resultado com o
@@ -107,3 +100,9 @@ export function CardDescription() {
     </CardStyled>
   );
 }
+
+export const TypographyStyled = styled(Typography)(({ theme }) => ({
+  display: "inline-block",
+  fontWeight: 700,
+  margin: theme.spacing(1, 0),
+}));
