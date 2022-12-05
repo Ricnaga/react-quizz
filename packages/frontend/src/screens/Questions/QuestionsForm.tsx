@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import { HOME, SCORE } from "../../application/routes/paths";
 import { questions, answers } from "../../config/data";
+import { api } from "../../application/api/axios";
 
 type QuestionsType = Array<{
   title: string;
@@ -62,21 +63,20 @@ export function QuestionsFormScreen() {
       return setSearchParams({ ...queryString, page: nextPage });
     }
 
-    const resultado = items
-      .reduce(
-        (accumulator, item) =>
-          item.answerValue ? accumulator + item.answerValue : accumulator,
-        0
-      )
-      .toString();
+    const data = {
+      ...queryString,
+      resultado: items
+        .reduce(
+          (accumulator, item) =>
+            item.answerValue ? accumulator + item.answerValue : accumulator,
+          0
+        )
+        .toString(),
+    };
 
-    navigate({
-      pathname: SCORE,
-      search: createSearchParams({
-        ...queryString,
-        resultado,
-      }).toString(),
-    });
+    api
+      .post<{ id: string }>("/user", data)
+      .then(({ data }) => navigate(`${SCORE}/${data.id}`));
   };
 
   const handleChangeAnswer = (questionTitle: string, answerNumber: number) =>

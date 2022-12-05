@@ -1,38 +1,26 @@
 import { Card, Grid, styled, Typography } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { api } from "../../application/api/axios";
 import logoAcreditarImg from "../../assets/logoAcreditar.png";
 import scoreImg from "../../assets/score.jpg";
 
+type Reponse = Record<"nome" | "resultado", string>;
+
 export function ScoreScreen() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const email = searchParams.get("email") ?? "";
-  const nome = searchParams.get("nome") ?? "";
-  const whatsapp = searchParams.get("whatsapp") ?? "";
-  const resultado = searchParams.get("resultado") ?? "";
+  const { userId } = useParams();
+  const [data, setData] = useState<Reponse>();
 
-  const [_, setcallOnce] = useState<boolean>(true);
-
-  const handlePostAPI = useCallback(
-    () =>
-      setcallOnce((state) => {
-        if (state) {
-          api.post("/register", {
-            email,
-            nome,
-            whatsapp,
-            resultado,
-          });
-        }
-
-        return !state;
-      }),
+  const handleGetResultado = useCallback(
+    async () =>
+      api
+        .get<Reponse>(`/quiz/${userId}`)
+        .then((response) => setData(response.data)),
     []
   );
 
   useEffect(() => {
-    handlePostAPI();
+    handleGetResultado();
   }, []);
 
   return (
@@ -40,13 +28,13 @@ export function ScoreScreen() {
       <CardStyled>
         <ImgStyled src={logoAcreditarImg} />
         <Typography variant="h6" fontWeight={700} align="center">
-          {nome.toUpperCase()}, analisando suas respostas
+          {data?.nome.toUpperCase()}, analisando suas respostas
         </Typography>
         <Typography variant="h4" fontWeight={700} align="center">
           A soma total das sua respostas é
         </Typography>
         <Typography variant="h3" fontWeight={700} align="center" marginY={2}>
-          {resultado}
+          {data?.resultado}
         </Typography>
         <Typography align="center">
           Pegue o total das suas resposta e veja na imagem a baixo qual o nível
