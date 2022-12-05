@@ -1,0 +1,19 @@
+{
+  "name": "quizz-example",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Ricard Naga",
+  "scripts": {
+    "dev:backend": "yarn workspace @quizz-example/backend dev",
+    "dev:frontend": "yarn workspace @quizz-example/frontend dev",
+    "dev": "concurrently \"yarn dev:frontend\" \"yarn dev:backend\""
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
