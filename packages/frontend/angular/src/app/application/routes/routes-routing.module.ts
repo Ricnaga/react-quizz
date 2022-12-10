@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from 'src/app/screens/home/home.component';
-import { QuestionsComponent } from 'src/app/screens/questions/questions.component';
-import { ScoreComponent } from 'src/app/screens/score/score.component';
 import { HOME, QUESTIONS, SCORE } from './paths';
 
 const rootRoutes: Routes = [
@@ -10,9 +7,21 @@ const rootRoutes: Routes = [
 ];
 
 const childRoutes: Routes = [
-  { path: HOME, component: HomeComponent },
-  { path: QUESTIONS, component: QuestionsComponent },
-  { path: SCORE, component: ScoreComponent }
+  {
+    path: HOME,
+    loadChildren: () => import('../../screens/home/home.module')
+      .then(({ HomeModule }) => HomeModule)
+  },
+  {
+    path: QUESTIONS,
+    loadChildren: () => import('../../screens/questions/questions.module')
+      .then(({ QuestionsModule }) => QuestionsModule)
+  },
+  {
+    path: SCORE,
+    loadChildren: () => import('../../screens/score/score.module')
+      .then(({ ScoreModule }) => ScoreModule)
+  },
 ];
 
 @NgModule({
