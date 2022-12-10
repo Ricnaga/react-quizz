@@ -4,13 +4,16 @@
   "private": true,
   "author": "Ricard Naga",
   "scripts": {
-    "dev:backend": "yarn workspace @quizz-example/backend dev",
-    "dev:frontend": "yarn workspace @quizz-example/frontend dev",
-    "dev": "concurrently \"yarn dev:frontend\" \"yarn dev:backend\""
+    "backend": "yarn workspace @quizz-example/backend dev",
+    "frontend:react": "yarn workspace @quizz-example/react dev",
+    "frontend:angular": "yarn workspace @quizz-example/angular start",
+    "dev:react": "concurrently \"yarn frontend:react\" \"yarn backend\"",
+    "dev:angular": "concurrently \"yarn frontend:angular\" \"yarn backend\""
   },
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "packages/frontend/*"
     ]
   },
   "devDependencies": {
