@@ -1,0 +1,4 @@
+@use '@angular/material' as mat;
+
+$bg-default: mat.get-color-from-palette(mat.define-palette(mat.$pink-palette), 100);
+

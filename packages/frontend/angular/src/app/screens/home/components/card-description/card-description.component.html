@@ -1,0 +1,61 @@
+<mat-card class="card">
+  <p class="mat-headline-4 card__title">
+    <strong>
+      Questionário para medir o Nível de Ansiedade, Depressão e Estresse (QNADE)
+    </strong>
+  </p>
+  <p class="mat-body-2">
+    O <strong>Questionário</strong> é composto de 24 perguntas e possui 2
+    objetivos:
+  </p>
+
+  <mat-list>
+    <mat-list-item *ngFor="let item of items; index as i">
+      <p class="mat-body-2 card__list-item">{{ i + 1 }}. {{ item }}</p>
+    </mat-list-item>
+  </mat-list>
+
+  <p class="mat-body-2"><strong>Como funciona ?</strong></p>
+  <p class="mat-body-2">
+    O <strong>QNADE</strong> utiliza um sistema de pontuação com base em um
+    código placas e cores organizado por Intensidade:
+  </p>
+  <i class="card__intensity">Emergência, Prioridade, Atenção e Não Urgente.</i>
+  <p class="mat-body-2"><strong>Como preencher o formulário?</strong></p>
+  <p class="mat-body-2">
+    Você deverá responder cada questões sobre os sintomas que apresentou
+    <strong>nos últimos 7 dias.</strong>
+  </p>
+  <p class="mat-body-2">Cada resposta tem uma pontuação na frente ex:</p>
+  <p class="mat-body-2"><strong>Pergunta:</strong></p>
+  <p class="mat-body-2">Você sentiu .... ?</p>
+  <p class="mat-body-2 list-title"><strong>Resposta:</strong></p>
+
+  <mat-list>
+    <mat-list-item *ngFor="let answer of cardAnswers; index as i">
+      <p class="mat-body-2 card__list-item">
+        <strong>{{ i }}</strong> - {{ answer }}
+      </p>
+    </mat-list-item>
+  </mat-list>
+  <p class="mat-body-2"><strong>#ATENÇÃO#</strong></p>
+  <p class="mat-body-2">
+    <strong>
+      A resposta que você marcou, na frente dela tem um número, pode ser (0,1,
+      2, 3 ou 4), o que precisa fazer é ir somando os pontos de cada resposta
+      manualmente e no final terá o total de pontos para verificar o seu nível.
+    </strong>
+  </p>
+  <p class="mat-body-2">
+    Assim que responder todas as perguntas você terá um resultado com o total de
+    pontos, este total você terá conferir na imagem abaixo o seu nível de
+    ansiedade.
+  </p>
+  <p class="mat-body-2">
+    Depois de preenchido todo o questionário você receberá um e-mail automático
+    para poder conferir sua resposta caso precise.
+  </p>
+  <p class="mat-body-2">
+    Este teste foi retirado do site Núcleo de Atenção ao Desenvolvimento Humano
+  </p>
+</mat-card>

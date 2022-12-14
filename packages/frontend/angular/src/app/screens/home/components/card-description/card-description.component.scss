@@ -1,0 +1,26 @@
+.card {
+    width: 80vw;
+    background-color: white;
+    margin: 3rem;
+
+    &__title {
+        margin-bottom: 1rem;
+    }
+
+    &__intensity {
+        margin-bottom: 1rem;
+    }
+
+    &__list-item {
+        color: black;
+    }
+
+    @media screen {
+        max-width: 660px;
+        padding: 2rem;    
+    }
+}
+
+.list-title {
+    margin: 0;    
+}
