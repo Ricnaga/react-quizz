@@ -1,12 +1,8 @@
 @import '../../home.component';
 .card {
-    &__title {
+    &__title, &__intensity {
         margin-bottom: 1rem;
-    }
-
-    &__intensity {
-        margin-bottom: 1rem;
-    }
+   }
 
 }
 
