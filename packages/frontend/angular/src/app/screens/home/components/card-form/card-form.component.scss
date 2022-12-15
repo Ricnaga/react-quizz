@@ -1,0 +1,12 @@
+@import '../../home.component';
+
+.card {
+    &__radio {
+        display: grid;
+        flex-direction: column;
+    }
+
+    &__button {
+        width: 20vw;
+    }
+}

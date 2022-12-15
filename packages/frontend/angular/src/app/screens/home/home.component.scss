@@ -2,3 +2,18 @@
     display: grid;    
     justify-content: center;
 }
+
+.card {
+    width: 80vw;
+    background-color: white;
+    margin: 3rem auto 0;
+
+    &:last-of-type {
+        margin-bottom: 3rem;
+    }
+
+    @media screen {
+        max-width: 660px;
+        padding: 2rem;    
+    }
+}
