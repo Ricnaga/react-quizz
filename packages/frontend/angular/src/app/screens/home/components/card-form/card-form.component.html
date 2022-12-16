@@ -1,21 +1,10 @@
-<mat-card class="card">
+<mat-card class="card" *ngFor="let input of inputs">
   <mat-form-field appearance="outline">
-    <mat-label>E-mail</mat-label>
-    <input matInput placeholder="Seu e-mail" />
+    <mat-label>{{ input.label }}</mat-label>
+    <input matInput (placeholder)="(input.placeholder)" />
   </mat-form-field>
 </mat-card>
-<mat-card class="card">
-  <mat-form-field appearance="outline">
-    <mat-label>Nome:</mat-label>
-    <input matInput placeholder="Sua resposta" />
-  </mat-form-field>
-</mat-card>
-<mat-card class="card">
-  <mat-form-field appearance="outline">
-    <mat-label>Telefone DDD+CELULAR 00 00000-0000</mat-label>
-    <input matInput placeholder="Sua resposta" />
-  </mat-form-field>
-</mat-card>
+
 <mat-card class="card">
   <mat-radio-group class="card__radio">
     <mat-radio-button
@@ -26,6 +15,7 @@
     >
   </mat-radio-group>
 </mat-card>
+
 <mat-card class="card">
   <button mat-raised-button color="primary" class="card__button">
     Próxima

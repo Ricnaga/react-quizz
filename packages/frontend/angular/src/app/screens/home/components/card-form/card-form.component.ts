@@ -7,6 +7,22 @@ import { MatRadioChange } from '@angular/material/radio';
   styleUrls: ['./card-form.component.scss']
 })
 export class CardFormComponent {
+
+  inputs = [
+    {
+      label: "E-mail",
+      placeholder: "Seu e-mail"
+    },
+    {
+      label: "Nome:",
+      placeholder: "Sua resposta"
+    },
+    {
+      label: "Telefone DDD+CELULAR 00 00000-0000:",
+      placeholder: "Sua resposta"
+    },
+  ]
+
   radioValue = [
     {
       value: true,
