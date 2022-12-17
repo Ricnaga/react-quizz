@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { QUESTIONS } from 'src/app/application/routes/paths';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  constructor(private router: Router) { }
+
   form = new FormGroup({});
 
   model = {};
@@ -15,6 +19,11 @@ export class HomeComponent {
     {
       key: 'email',
       wrappers: ['card-form'],
+      props: {
+        attributes: {
+          style: "width:100vw;"
+        },
+      },
       fieldGroup: [
         {
           key: 'email-input',
@@ -63,6 +72,7 @@ export class HomeComponent {
     {
       key: 'Radio',
       type: 'radio',
+      className: "card__radio",
       wrappers: ['card-form'],
       props: {
         required: true,
@@ -74,8 +84,8 @@ export class HomeComponent {
     },
   ];
 
-  onSubmit(model: any) {
-    console.log(model)
+  onSubmit() {
+    this.router.navigate([QUESTIONS])
   }
 
 }

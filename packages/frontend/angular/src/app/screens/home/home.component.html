@@ -1,6 +1,6 @@
 <div class="container">
   <app-card-description> </app-card-description>
-  <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <formly-form [model]="model" [fields]="fields" [form]="form"> </formly-form>
     <mat-card class="card">
       <button

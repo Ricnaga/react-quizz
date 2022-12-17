@@ -13,3 +13,12 @@ html, body {
     background: $bg-default;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+mat-form-field {
+    width: 100%;
+}
+
+mat-radio-group {
+    display: grid;
+    flex-direction: column;
+}
