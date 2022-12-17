@@ -1,4 +1,4 @@
-@import '../../home.component';
+@import '../../home.component.scss';
 
 .card {
     &__radio {
@@ -6,7 +6,4 @@
         flex-direction: column;
     }
 
-    &__button {
-        width: 20vw;
-    }
 }

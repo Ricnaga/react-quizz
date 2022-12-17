@@ -1,12 +1,17 @@
+
 .container{
     display: grid;    
     justify-content: center;
 }
 
 .card {
-    width: 80vw;
+    width: 96vw;
     background-color: white;
     margin: 3rem auto 0;
+
+    &__button {
+        width: 20vw;
+    }
 
     &:last-of-type {
         margin-bottom: 1rem;

@@ -1,4 +1,16 @@
 <div class="container">
   <app-card-description> </app-card-description>
-  <app-card-form> </app-card-form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+    <formly-form [model]="model" [fields]="fields" [form]="form"> </formly-form>
+    <mat-card class="card">
+      <button
+        mat-raised-button
+        color="primary"
+        class="card__button"
+        type="submit"
+      >
+        Próxima
+      </button>
+    </mat-card>
+  </form>
 </div>

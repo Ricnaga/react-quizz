@@ -11,8 +11,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfigOption, FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
 const routes: Routes = [{ path: '', component: HomeComponent }]
+const formlyConfig: ConfigOption = {
+  wrappers: [
+    { name: 'card-form', component: CardFormComponent },
+  ],
+}
 
 @NgModule({
   declarations: [HomeComponent, CardDescriptionComponent, CardFormComponent],
@@ -23,9 +30,11 @@ const routes: Routes = [{ path: '', component: HomeComponent }]
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule,
+    FormlyMaterialModule,
+    FormlyModule.forRoot(formlyConfig),
     RouterModule.forChild(routes)
   ]
 })
