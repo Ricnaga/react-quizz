@@ -1,0 +1,8 @@
+.card {
+    width: 96vw;
+
+    @media screen {
+        max-width: 660px;
+        padding: 1rem;    
+    }
+}

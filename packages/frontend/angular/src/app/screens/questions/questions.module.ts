@@ -8,7 +8,7 @@ const routes: Routes = [{ path: '', component: QuestionsComponent }]
 
 
 @NgModule({
-  declarations: [],
+  declarations: [QuestionsComponent],
   imports: [
     CommonModule,
     MatCardModule,

@@ -21,3 +21,12 @@ html, body {
     justify-content: center;
     padding: 3rem;
 }
+
+.card {
+    width: 96vw;
+
+    @media screen {
+        max-width: 660px;
+        padding: 1rem;    
+    }
+}

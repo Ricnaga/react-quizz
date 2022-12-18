@@ -1,18 +1,11 @@
 .card {
-    width: 96vw;
-    background-color: white;
-
+    
     &__button {
         width: 20vw;
     }
-
+    
     &:last-of-type {
         margin-bottom: 1rem;
-    }
-
-    @media screen {
-        max-width: 660px;
-        padding: 2rem;    
-    }
+    }    
 }
 
