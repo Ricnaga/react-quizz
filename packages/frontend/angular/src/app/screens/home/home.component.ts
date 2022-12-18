@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { QUESTIONS } from 'src/app/application/routes/paths';
+import { HOME, QUESTIONS } from 'src/app/application/routes/paths';
 
 @Component({
   templateUrl: './home.component.html',
@@ -19,15 +19,11 @@ export class HomeComponent {
     {
       key: 'email',
       wrappers: ['card-form'],
-      props: {
-        attributes: {
-          style: "width:100vw;"
-        },
-      },
       fieldGroup: [
         {
           key: 'email-input',
           type: 'input',
+          className: `${HOME}-screen__input`,
           props: {
             "appearance": "outline",
             label: "E-mail",
@@ -44,6 +40,7 @@ export class HomeComponent {
         {
           key: 'nome-input',
           type: 'input',
+          className: `${HOME}-screen__input`,
           props: {
             "appearance": "outline",
             label: "Nome:",
@@ -60,6 +57,7 @@ export class HomeComponent {
         {
           key: 'telefone-input',
           type: 'input',
+          className: `${HOME}-screen__input`,
           props: {
             "appearance": "outline",
             label: "Telefone DDD+CELULAR 00 00000-0000",
@@ -72,8 +70,8 @@ export class HomeComponent {
     {
       key: 'Radio',
       type: 'radio',
-      className: "card__radio",
       wrappers: ['card-form'],
+      className: `${HOME}-screen__radio`,
       props: {
         required: true,
         options: [

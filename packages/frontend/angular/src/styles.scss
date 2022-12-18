@@ -14,11 +14,14 @@ html, body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-mat-form-field {
-    width: 100%;
-}
-
-mat-radio-group {
-    display: grid;
-    flex-direction: column;
+    
+.home-screen {
+    &__input mat-form-field {
+        width: 100%;
+    }
+        
+    &__radio mat-radio-group {
+        display: grid;
+        flex-direction: column;
+    }
 }
