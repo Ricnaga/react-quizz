@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { QuestionsComponent } from './questions.component';
+import { MatCardModule } from '@angular/material/card';
 
 const routes: Routes = [{ path: '', component: QuestionsComponent }]
 
@@ -10,6 +11,7 @@ const routes: Routes = [{ path: '', component: QuestionsComponent }]
   declarations: [],
   imports: [
     CommonModule,
+    MatCardModule,
     RouterModule.forChild(routes)
   ]
 })

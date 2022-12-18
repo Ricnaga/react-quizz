@@ -1,11 +1,7 @@
-@import './components/card-form/card-form.component.scss';
-
-.container{
-    display: grid;    
-    justify-content: center;
-}
-
 .card {
+    width: 96vw;
+    background-color: white;
+
     &__button {
         width: 20vw;
     }
@@ -14,5 +10,9 @@
         margin-bottom: 1rem;
     }
 
+    @media screen {
+        max-width: 660px;
+        padding: 2rem;    
+    }
 }
 

@@ -1,11 +1,1 @@
-
-.card {
-    width: 96vw;
-    background-color: white;
-    margin: 3rem auto 0;
-
-    @media screen {
-        max-width: 660px;
-        padding: 2rem;    
-    }
-}
+@import '../../home.component.scss';

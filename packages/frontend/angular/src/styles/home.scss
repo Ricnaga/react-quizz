@@ -1,0 +1,10 @@
+.home-screen {
+    &__input mat-form-field {
+        width: 100%;
+    }
+        
+    &__radio mat-radio-group {
+        display: grid;
+        flex-direction: column;
+    }
+}

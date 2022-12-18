@@ -1,5 +1,6 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import 'theme';
+@import 'palette.scss';
+@import 'home.scss';
 
 /* You can add global styles to this file, and also import other style files */
 * {
@@ -14,14 +15,9 @@ html, body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-    
-.home-screen {
-    &__input mat-form-field {
-        width: 100%;
-    }
-        
-    &__radio mat-radio-group {
-        display: grid;
-        flex-direction: column;
-    }
+.container{
+    height: 100%;
+    display: grid;    
+    justify-content: center;
+    padding: 3rem;
 }

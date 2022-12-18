@@ -1,11 +1,12 @@
-@import '../../home.component';
+@import '../../home.component.scss';
+
 .card {
     &__title, &__intensity {
         margin-bottom: 1rem;
    }
 
-}
+   &__list-title {
+       margin: 0;    
+   }
 
-.list-title {
-    margin: 0;    
 }
