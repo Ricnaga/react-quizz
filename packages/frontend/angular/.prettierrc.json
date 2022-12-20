@@ -1,0 +1,14 @@
+{
+    "trailingComma": "all",
+    "singleQuote": true,
+    "bracketSameLine": false,
+    "overrides": [
+      {
+        "files": ["*.html"],
+        "options": {
+          "parser": "html"
+        }
+      }
+    ]
+  }
+  

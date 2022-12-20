@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 
-const routes: Routes = [{ path: '', component: QuestionsComponent }]
+const routes: Routes = [{ path: '', component: QuestionsComponent }];
 
 @NgModule({
   declarations: [QuestionsComponent],
@@ -15,7 +15,7 @@ const routes: Routes = [{ path: '', component: QuestionsComponent }]
     MatCardModule,
     MatButtonModule,
     MatRadioModule,
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class QuestionsModule { }
+export class QuestionsModule {}

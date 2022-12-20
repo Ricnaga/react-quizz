@@ -1,25 +1,30 @@
 <div class="container">
   <mat-card class="card">
-      <mat-card-header>
-        <p class="mat-headline-4">
-          <strong> Questionário {{ 1 }} (QNADE) </strong>
-        </p>
-      </mat-card-header>
+    <mat-card-header>
+      <p class="mat-headline-4">
+        <strong> Questionário {{ 1 }} (QNADE) </strong>
+      </p>
+    </mat-card-header>
 
-      <mat-card-content *ngFor="let question of paginateQuestions">
-        <label> <p class="mat-h1">- {{ question }}</p></label>
-        
-        <mat-radio-group>
+    <mat-card-content *ngFor="let question of paginateQuestions">
+      <label>
+        <p class="mat-h1">- {{ question }}</p></label
+      >
+
+      <mat-radio-group>
         <mat-radio-button *ngFor="let answer of answervalue" [value]="answer">
-          {{answer.text}}
+          {{ answer.text }}
         </mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
-
   </mat-card>
 
   <div class="card__buttons">
-    <button mat-stroked-button color="primary" (click)="onPrevious()">Voltar</button>
-    <button mat-raised-button color="primary" (click)="onNext()">Próxima</button>
+    <button mat-stroked-button color="primary" (click)="onPrevious()">
+      Voltar
+    </button>
+    <button mat-raised-button color="primary" (click)="onNext()">
+      Próxima
+    </button>
   </div>
 </div>

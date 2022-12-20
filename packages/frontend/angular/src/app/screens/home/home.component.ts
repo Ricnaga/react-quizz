@@ -6,10 +6,10 @@ import { HOME, QUESTIONS } from 'src/app/app-routing.module';
 
 @Component({
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   form = new FormGroup({});
 
@@ -25,11 +25,11 @@ export class HomeComponent {
           type: 'input',
           className: `${HOME}-screen__input`,
           props: {
-            "appearance": "outline",
-            label: "E-mail",
-            placeholder: "Seu e-mail",
+            appearance: 'outline',
+            label: 'E-mail',
+            placeholder: 'Seu e-mail',
             required: true,
-          }
+          },
         },
       ],
     },
@@ -42,13 +42,13 @@ export class HomeComponent {
           type: 'input',
           className: `${HOME}-screen__input`,
           props: {
-            "appearance": "outline",
-            label: "Nome:",
-            placeholder: "Sua resposta",
+            appearance: 'outline',
+            label: 'Nome:',
+            placeholder: 'Sua resposta',
             required: true,
-          }
+          },
         },
-      ]
+      ],
     },
     {
       key: 'telefone',
@@ -59,11 +59,11 @@ export class HomeComponent {
           type: 'input',
           className: `${HOME}-screen__input`,
           props: {
-            "appearance": "outline",
-            label: "Telefone DDD+CELULAR 00 00000-0000",
-            placeholder: "Sua resposta",
+            appearance: 'outline',
+            label: 'Telefone DDD+CELULAR 00 00000-0000',
+            placeholder: 'Sua resposta',
             required: true,
-          }
+          },
         },
       ],
     },
@@ -83,7 +83,6 @@ export class HomeComponent {
   ];
 
   onSubmit() {
-    this.router.navigate([QUESTIONS])
+    this.router.navigate([QUESTIONS]);
   }
-
 }

@@ -4,7 +4,7 @@ import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CardDescriptionComponent } from './components/card-description/card-description.component';
 import { MatCardModule } from '@angular/material/card';
-import { MatListModule, } from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { CardFormComponent } from './components/card-form/card-form.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,12 +14,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfigOption, FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 
-const routes: Routes = [{ path: '', component: HomeComponent }]
+const routes: Routes = [{ path: '', component: HomeComponent }];
 const formlyConfig: ConfigOption = {
-  wrappers: [
-    { name: 'card-form', component: CardFormComponent },
-  ],
-}
+  wrappers: [{ name: 'card-form', component: CardFormComponent }],
+};
 
 @NgModule({
   declarations: [HomeComponent, CardDescriptionComponent, CardFormComponent],
@@ -35,7 +33,7 @@ const formlyConfig: ConfigOption = {
     ReactiveFormsModule,
     FormlyMaterialModule,
     FormlyModule.forRoot(formlyConfig),
-    RouterModule.forChild(routes)
-  ]
+    RouterModule.forChild(routes),
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

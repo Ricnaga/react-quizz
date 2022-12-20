@@ -3,14 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ScoreComponent } from './score.component';
 
-const routes: Routes = [{ path: '', component: ScoreComponent }]
-
+const routes: Routes = [{ path: '', component: ScoreComponent }];
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [CommonModule, RouterModule.forChild(routes)],
 })
-export class ScoreModule { }
+export class ScoreModule {}

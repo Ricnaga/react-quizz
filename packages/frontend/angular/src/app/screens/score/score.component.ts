@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   templateUrl: './score.component.html',
-  styleUrls: ['./score.component.scss']
+  styleUrls: ['./score.component.scss'],
 })
-export class ScoreComponent {
-
-}
+export class ScoreComponent {}
