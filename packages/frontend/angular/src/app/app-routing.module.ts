@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HOME, QUESTIONS, SCORE } from './paths';
+
+export const HOME = 'home'
+export const QUESTIONS = 'questions'
+export const SCORE = 'score'
 
 const rootRoutes: Routes = [
   { path: '', redirectTo: HOME, pathMatch: 'full' }
@@ -9,17 +12,17 @@ const rootRoutes: Routes = [
 const childRoutes: Routes = [
   {
     path: HOME,
-    loadChildren: () => import('../../screens/home/home.module')
+    loadChildren: () => import('./screens/home/home.module')
       .then(({ HomeModule }) => HomeModule)
   },
   {
     path: QUESTIONS,
-    loadChildren: () => import('../../screens/questions/questions.module')
+    loadChildren: () => import('./screens/questions/questions.module')
       .then(({ QuestionsModule }) => QuestionsModule)
   },
   {
     path: SCORE,
-    loadChildren: () => import('../../screens/score/score.module')
+    loadChildren: () => import('./screens/score/score.module')
       .then(({ ScoreModule }) => ScoreModule)
   },
 ];
@@ -31,4 +34,4 @@ const childRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class RoutesRoutingModule { }
+export class AppRoutingModule { }

@@ -17,7 +17,8 @@ html, body {
 
 .container{
     height: 100%;
-    display: grid;    
+    display: grid;
+    gap: 1rem;
     justify-content: center;
     padding: 3rem;
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { HOME, QUESTIONS } from 'src/app/application/routes/paths';
+import { HOME, QUESTIONS } from 'src/app/app-routing.module';
 
 @Component({
   templateUrl: './home.component.html',

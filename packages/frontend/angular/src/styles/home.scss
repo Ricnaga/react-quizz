@@ -1,4 +1,6 @@
-.home-screen {
+$home: "home-screen";
+
+.#{$home} {
     &__input mat-form-field {
         width: 100%;
     }
