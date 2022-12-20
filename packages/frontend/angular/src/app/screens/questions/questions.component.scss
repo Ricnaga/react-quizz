@@ -1,8 +1,15 @@
 .card {
-    width: 96vw;
 
-    @media screen {
-        max-width: 660px;
-        padding: 1rem;    
+    .mat-headline-4 {
+        width: 100%;
+        text-align: center;
+    }
+
+    &__buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        align-items: flex-start;
+        justify-content: center;
     }
 }
