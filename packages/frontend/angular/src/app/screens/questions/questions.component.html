@@ -1,12 +1,12 @@
 <div class="container">
-  <mat-card class="card">
+  <mat-card class="card" *ngFor="let question of paginateQuestions">
     <mat-card-header>
       <p class="mat-headline-4">
-        <strong> Questionário {{ 1 }} (QNADE) </strong>
+        <strong> Questionário {{ questionNumber + 1 }} (QNADE) </strong>
       </p>
     </mat-card-header>
 
-    <mat-card-content *ngFor="let question of paginateQuestions">
+    <mat-card-content>
       <label>
         <p class="mat-h1">- {{ question }}</p></label
       >

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Params, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HOME, SCORE } from 'src/app/app-routing.module';
 import { answers, questions } from 'src/app/config/data';
+import { QuestionsService } from './services/questions.service';
 
 const PAGE_SIZE = 1;
 
@@ -10,6 +12,7 @@ const PAGE_SIZE = 1;
 })
 export class QuestionsComponent implements OnInit {
   pageNumber = '0';
+  questionNumber = 0;
   paginateQuestions = new Array<string>();
 
   answervalue = answers.map((answer, index) => ({
@@ -17,33 +20,56 @@ export class QuestionsComponent implements OnInit {
     value: index,
   }));
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private questionsService: QuestionsService,
+  ) {}
+
+  set nextQuestion(nextPageNumber: number) {
+    const initialQuestion = nextPageNumber * PAGE_SIZE;
+    const currentQuestion = initialQuestion + PAGE_SIZE;
+
+    this.questionNumber = nextPageNumber;
+
+    this.paginateQuestions = questions.slice(initialQuestion, currentQuestion);
+  }
 
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       this.pageNumber = params.get('page') ?? this.pageNumber;
     });
+
+    this.nextQuestion = parseInt(this.pageNumber, 10);
   }
 
   onPrevious() {
-    const queryParams: Params = { page: parseInt(this.pageNumber, 10) - 1 };
-    this.paginateQuestions = questions.slice(
-      parseInt(this.pageNumber, 10) * PAGE_SIZE,
-      parseInt(this.pageNumber, 10) * PAGE_SIZE + PAGE_SIZE,
-    );
+    const previousPage = parseInt(this.pageNumber, 10) - 1;
+
+    if (this.questionsService.isStartQuestions(previousPage)) {
+      this.router.navigate([HOME]);
+      return;
+    }
+
+    this.nextQuestion = previousPage;
+
     this.router.navigate([], {
-      queryParams,
+      queryParams: { page: previousPage },
     });
   }
 
   onNext() {
-    const queryParams: Params = { page: parseInt(this.pageNumber, 10) + 1 };
-    this.paginateQuestions = questions.slice(
-      parseInt(this.pageNumber, 10) * PAGE_SIZE,
-      parseInt(this.pageNumber, 10) * PAGE_SIZE + PAGE_SIZE,
-    );
+    const nextPage = parseInt(this.pageNumber, 10) + 1;
+
+    if (this.questionsService.isFinishQuestions(nextPage)) {
+      this.router.navigate([SCORE]);
+      return;
+    }
+
+    this.nextQuestion = nextPage;
+
     this.router.navigate([], {
-      queryParams,
+      queryParams: { page: nextPage },
     });
   }
 }
