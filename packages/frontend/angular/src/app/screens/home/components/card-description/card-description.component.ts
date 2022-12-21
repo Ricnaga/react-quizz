@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { answers } from 'src/app/config/data';
+import { answers } from 'src/app/data/constants';
 
 @Component({
   selector: 'app-card-description',

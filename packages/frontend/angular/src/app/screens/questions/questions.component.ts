@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HOME, SCORE } from 'src/app/app-routing.module';
-import { answers, questions } from 'src/app/config/data';
-import { QuestionsService } from './services/questions.service';
+import { answers, questions } from 'src/app/data/constants';
+import { QuestionsService } from './services/questions/questions.service';
 
 const PAGE_SIZE = 1;
 
