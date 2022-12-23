@@ -41,23 +41,23 @@ export function ScoreScreen() {
           da sua ansiedade.
         </Typography>
         <Typography align="center">
-          – Se o total deu <strong>acima de 60</strong> você precisa
+          &#175; Se o total deu <strong>acima de 60</strong> você precisa
           <strong> cuidar urgentemente da sua Ansiedade.</strong>
         </Typography>
         <Typography align="center">
-          – Se o total deu <strong>de 36 a 59</strong> você precisa
+          &#175; Se o total deu <strong>de 36 a 59</strong> você precisa
           <strong> cuidar urgentemente da sua Ansiedade.</strong>
         </Typography>
         <Typography align="center">
-          – Se o total deu <strong>de 16 a 35</strong> você precisa olhar com
+          &#175; Se o total deu <strong>de 16 a 35</strong> você precisa olhar com
           <strong> atenção para sua Ansiedade.</strong>
         </Typography>
         <Typography align="center">
-          – Se o total deu <strong>menos que 15</strong> você saber que
+          &#175; Se o total deu <strong>menos que 15</strong> você saber que
           <strong> tem pouca de Ansiedade.</strong>
         </Typography>
         <Typography align="center">
-          – Se o total deu <strong>ZERO</strong>, parabéns você tem o domínio
+          &#175; Se o total deu <strong>ZERO</strong>, parabéns você tem o domínio
           total da sua vida e ansiedade não faz parte do seu dia a dia.
         </Typography>
         <ImgScore src={scoreImg} />

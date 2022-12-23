@@ -11,7 +11,6 @@ import {
   styled,
 } from "@mui/material";
 import {
-  createSearchParams,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";

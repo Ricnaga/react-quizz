@@ -27,7 +27,8 @@ export class QuestionsService {
               queryParams: { page: nextPage },
             }),
           error: (error) => throwError(() => new Error(`Erro: ${error}`)),
-        });
+        })
+        .unsubscribe();
       return true;
     }
 

@@ -1,0 +1,14 @@
+img {
+  margin: auto;
+  display: grid;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.container {
+  &__score {
+    display: grid;
+    text-align: center;
+    justify-content: center;
+  }
+}
