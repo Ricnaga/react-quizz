@@ -16,6 +16,9 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 
 const routes: Routes = [{ path: '', component: HomeComponent }];
 const formlyConfig: ConfigOption = {
+  validationMessages: [
+    { name: 'required', message: 'Esse campo é obrigatório' },
+  ],
   wrappers: [{ name: 'card-form', component: CardFormComponent }],
 };
 

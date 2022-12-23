@@ -3,13 +3,18 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HOME, QUESTIONS } from 'src/app/app-routing.module';
+import { IFormlyValues } from './IFormlyValues.interface';
+import { FieldValidatorsService } from './services/field-validators.service';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private fieldValidatorsService: FieldValidatorsService,
+  ) {}
 
   form = new FormGroup({});
 
@@ -17,14 +22,20 @@ export class HomeComponent {
 
   fields: Array<FormlyFieldConfig> = [
     {
-      key: 'email',
       wrappers: ['card-form'],
       fieldGroup: [
         {
-          key: 'email-input',
+          key: 'email',
           type: 'input',
+          validators: {
+            email: {
+              expression: this.fieldValidatorsService.email,
+              message: () => 'Esse valor não é um e-mail',
+            },
+          },
           className: `${HOME}-screen__input`,
           props: {
+            type: 'email',
             appearance: 'outline',
             label: 'E-mail',
             placeholder: 'Seu e-mail',
@@ -34,12 +45,17 @@ export class HomeComponent {
       ],
     },
     {
-      key: 'nome',
       wrappers: ['card-form'],
       fieldGroup: [
         {
-          key: 'nome-input',
+          key: 'nome',
           type: 'input',
+          validators: {
+            nome: {
+              expression: this.fieldValidatorsService.nome,
+              message: () => 'Verifique novamente o campo nome',
+            },
+          },
           className: `${HOME}-screen__input`,
           props: {
             appearance: 'outline',
@@ -51,14 +67,20 @@ export class HomeComponent {
       ],
     },
     {
-      key: 'telefone',
       wrappers: ['card-form'],
       fieldGroup: [
         {
-          key: 'telefone-input',
+          key: 'telefone',
           type: 'input',
+          validators: {
+            telefone: {
+              expression: this.fieldValidatorsService.telefone,
+              message: () => 'Verifique novamente o campo telefone',
+            },
+          },
           className: `${HOME}-screen__input`,
           props: {
+            type: 'tel',
             appearance: 'outline',
             label: 'Telefone DDD+CELULAR 00 00000-0000',
             placeholder: 'Sua resposta',
@@ -68,9 +90,15 @@ export class HomeComponent {
       ],
     },
     {
-      key: 'Radio',
+      key: 'maioridade',
       type: 'radio',
       wrappers: ['card-form'],
+      validators: {
+        maioridade: {
+          expression: this.fieldValidatorsService.maioridade,
+          message: () => 'Você precisa ser maior de 18',
+        },
+      },
       className: `${HOME}-screen__radio`,
       props: {
         required: true,
@@ -82,7 +110,8 @@ export class HomeComponent {
     },
   ];
 
-  onSubmit() {
-    this.router.navigate([QUESTIONS]);
+  onSubmit(model: IFormlyValues | Record<symbol, symbol>) {
+    if (this.form.valid)
+      this.router.navigate([QUESTIONS], { queryParams: model });
   }
 }
