@@ -4,6 +4,7 @@ import { PORT } from '../../../config/environment'
 import { initMessage } from '../../../utils';
 import { quizRoutes } from './routes/quiz.routes';
 import { userRoutes } from './routes/user.routes';
+import { initKnexDB } from '../knex/knexfile';
 
 const app = fastify({ logger: false })
 
@@ -14,4 +15,5 @@ app.register(userRoutes, { prefix: "user" });
 
 (async () => app.listen({ port: PORT })
     .then(() => initMessage(PORT))
+    .then(() => initKnexDB())
     .catch((error) => process.exit(error)))()
