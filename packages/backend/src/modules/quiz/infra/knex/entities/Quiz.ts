@@ -1,1 +1,1 @@
-export class Quiz { }
+export class Quiz {}

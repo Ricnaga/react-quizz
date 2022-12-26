@@ -8,7 +8,8 @@
     "frontend:react": "yarn workspace @quizz-example/react dev",
     "frontend:angular": "yarn workspace @quizz-example/angular start",
     "dev:react": "concurrently \"yarn frontend:react\" \"yarn backend\"",
-    "dev:angular": "concurrently \"yarn frontend:angular\" \"yarn backend\""
+    "dev:angular": "concurrently \"yarn frontend:angular\" \"yarn backend\"",
+    "lint:fix": "yarn workspace @quizz-example/backend lint:fix"
   },
   "workspaces": {
     "packages": [

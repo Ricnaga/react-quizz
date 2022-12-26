@@ -10,5 +10,13 @@
     "strictPropertyInitialization": false,
     "resolveJsonModule": true,
     "target": "es2016",
+    "baseUrl": "./src",
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"],
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"]
+    }
   }
 }
