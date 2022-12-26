@@ -5,7 +5,8 @@
     "dev": "ts-node-dev --inspect -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "yarn lint --fix",
-    "typecheck": "tsc -p tsconfig.json --pretty --noEmit"
+    "typecheck": "tsc -p tsconfig.json --pretty --noEmit",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@fastify/cors": "^8.2.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-import-helpers": "^1.3.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.1.1",

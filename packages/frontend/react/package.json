@@ -2,26 +2,28 @@
   "name": "@quizz-example/react",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config ./vite.config.ts",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "yarn lint --fix",
-    "typecheck": "tsc -p tsconfig.json --pretty --noEmit"
+    "typecheck": "tsc -p tsconfig.json --pretty --noEmit",
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.2",
+    "@vitejs/plugin-react": "^3.0.0",
     "axios": "^1.2.1",
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "vite": "^4.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",
@@ -35,7 +37,6 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
-    "@vitejs/plugin-react": "^3.0.0",
     "babel-loader": "^9.1.0",
     "eslint": "^8.30.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -47,8 +48,8 @@
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.1",
-    "typescript": "^4.9.4",
-    "vite": "^4.0.3"
+    "typescript": "^4.9.4"
   }
 }

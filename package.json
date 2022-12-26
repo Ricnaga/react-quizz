@@ -9,8 +9,9 @@
     "frontend:angular": "yarn workspace @quizz-example/angular start",
     "dev:react": "concurrently \"yarn frontend:react\" \"yarn backend\"",
     "dev:angular": "concurrently \"yarn frontend:angular\" \"yarn backend\"",
-    "lint:fix": "yarn workspace @quizz-example/backend lint:fix && yarn workspace @quizz-example/angular lint:fix && yarn workspace @quizz-example/react lint:fix",
-    "typecheck": "yarn workspace @quizz-example/backend typecheck && yarn workspace @quizz-example/angular typecheck && yarn workspace @quizz-example/react typecheck"
+    "lint:fix": "yarn workspaces run lint:fix",
+    "typecheck": "yarn workspaces run typecheck",
+    "prepare": "husky install"
   },
   "workspaces": {
     "packages": [
@@ -19,6 +20,7 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "husky": "^8.0.0"
   }
 }
