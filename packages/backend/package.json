@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "ts-node-dev --inspect -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "lint": "eslint --ext .ts src/",
-    "lint:fix": "yarn lint --fix"
+    "lint:fix": "yarn lint --fix",
+    "typecheck": "tsc -p tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
     "@fastify/cors": "^8.2.0",

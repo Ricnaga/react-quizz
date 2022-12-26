@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FieldValidatorsService {
-  constructor() {}
-
   email(control: AbstractControl): boolean {
     const value = String(control.value);
     if (value.indexOf('@') < 5) return false;

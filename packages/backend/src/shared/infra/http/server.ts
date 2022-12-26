@@ -1,8 +1,8 @@
+import { PORT } from '@config/environment';
 import { fastifyCors } from '@fastify/cors';
+import { initMessage } from '@utils';
 import { fastify } from 'fastify';
 
-import { PORT } from '../../../config/environment';
-import { initMessage } from '../../../utils';
 import { initKnexDB } from '../knex/knexfile';
 import { quizRoutes, userRoutes } from './routes';
 
