@@ -6,7 +6,7 @@
     "dev": "vite --config ./vite.config.ts",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --ext .ts src/",
+    "lint": "eslint --ext .ts --ext .tsx src",
     "lint:fix": "yarn lint --fix",
     "typecheck": "tsc -p tsconfig.json --pretty --noEmit",
     "precommit": "lint-staged"

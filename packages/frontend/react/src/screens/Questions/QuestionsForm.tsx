@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Button,
   Card,
@@ -9,14 +9,22 @@ import {
   RadioGroup,
   Typography,
   styled,
-} from "@mui/material";
-import {
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { HOME, SCORE } from "../../application/routes/paths";
-import { questions, answers } from "../../config/data";
-import { api } from "../../application/api/axios";
+} from '@mui/material';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { HOME, SCORE } from '../../application/routes/paths';
+import { questions, answers } from '../../config/data';
+import { api } from '../../application/api/axios';
+
+export const GridStyled = styled(Grid)(({ theme }) => ({
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(2, 50),
+  },
+}));
+
+const CardStyled = styled(Card)(({ theme }) => ({
+  padding: theme.spacing(4),
+  margin: theme.spacing(4),
+}));
 
 type QuestionsType = Array<{
   title: string;
@@ -35,11 +43,11 @@ export function QuestionsFormScreen() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [items, setItems] = useState<QuestionsType>(FORMATTED_QUESTIONS);
 
-  const pageNumber = parseInt(searchParams.get("page") ?? "1", 10);
+  const pageNumber = parseInt(searchParams.get('page') ?? '1', 10);
   const queryString = {
-    email: searchParams.get("email") as string,
-    nome: searchParams.get("nome") as string,
-    whatsapp: searchParams.get("whatsapp") as string,
+    email: searchParams.get('email') as string,
+    nome: searchParams.get('nome') as string,
+    whatsapp: searchParams.get('whatsapp') as string,
   };
 
   const firstQuestion = (pageNumber - 1) * PAGESIZE;
@@ -68,13 +76,13 @@ export function QuestionsFormScreen() {
         .reduce(
           (accumulator, item) =>
             item.answerValue ? accumulator + item.answerValue : accumulator,
-          0
+          0,
         )
         .toString(),
     };
 
     api
-      .post<{ id: string }>("/user", data)
+      .post<{ id: string }>('/user', data)
       .then(({ data }) => navigate(`${SCORE}/${data.id}`));
   };
 
@@ -83,8 +91,8 @@ export function QuestionsFormScreen() {
       state.map((newState) =>
         newState.title === questionTitle
           ? { ...newState, answerValue: answerNumber }
-          : newState
-      )
+          : newState,
+      ),
     );
 
   return (
@@ -103,7 +111,7 @@ export function QuestionsFormScreen() {
               <RadioGroup>
                 {answers.map((answer, index) => (
                   <FormControlLabel
-                    sx={{ padding: "1rem" }}
+                    sx={{ padding: '1rem' }}
                     key={answer}
                     checked={answerValue === index}
                     control={<Radio />}
@@ -121,20 +129,9 @@ export function QuestionsFormScreen() {
         </Button>
 
         <Button onClick={handleNextPage} variant="contained">
-          {isEndQuestions ? "Enviar" : "Próxima"}
+          {isEndQuestions ? 'Enviar' : 'Próxima'}
         </Button>
       </Grid>
     </GridStyled>
   );
 }
-
-export const GridStyled = styled(Grid)(({ theme }) => ({
-  [theme.breakpoints.up("sm")]: {
-    padding: theme.spacing(2, 50),
-  },
-}));
-
-const CardStyled = styled(Card)(({ theme }) => ({
-  padding: theme.spacing(4),
-  margin: theme.spacing(4),
-}));

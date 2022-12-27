@@ -1,14 +1,19 @@
 import {
-  Card,
   Grid,
   List,
   ListItem,
   ListItemText,
   styled,
   Typography,
-} from "@mui/material";
-import { answers } from "../../config/data";
-import { CardStyled } from "./Home";
+} from '@mui/material';
+import { answers } from '../../config/data';
+import { CardStyled } from './Home';
+
+export const TypographyStyled = styled(Typography)(({ theme }) => ({
+  display: 'inline-block',
+  fontWeight: 700,
+  margin: theme.spacing(1, 0),
+}));
 
 export function CardDescription() {
   return (
@@ -23,8 +28,8 @@ export function CardDescription() {
       </Typography>
       <List>
         {[
-          "Identificado os sintomas de ansiedade, depressão e estresse.",
-          "Identificar o Nível que você se encontra.",
+          'Identificado os sintomas de ansiedade, depressão e estresse.',
+          'Identificar o Nível que você se encontra.',
         ].map((text, index) => (
           <ListItem key={text}>
             <ListItemText>
@@ -51,12 +56,12 @@ export function CardDescription() {
       <TypographyStyled>Como preencher o formulário?</TypographyStyled>
 
       <Typography variant="body2" marginY={1}>
-        Você deverá responder cada questões sobre os sintomas que apresentou{" "}
+        Você deverá responder cada questões sobre os sintomas que apresentou{' '}
         <strong>nos últimos 7 dias.</strong>
       </Typography>
 
       <Typography variant="body2">
-        Cada resposta tem uma pontuação na frente ex:{" "}
+        Cada resposta tem uma pontuação na frente ex:{' '}
       </Typography>
 
       <TypographyStyled>Pergunta:</TypographyStyled>
@@ -67,9 +72,9 @@ export function CardDescription() {
 
       {answers.map((answer, index) => (
         <Grid key={answer}>
-          <Typography sx={{ display: "inline-block" }} fontWeight={700}>
+          <Typography sx={{ display: 'inline-block' }} fontWeight={700}>
             {index} -
-          </Typography>{" "}
+          </Typography>{' '}
           {answer}
         </Grid>
       ))}
@@ -100,9 +105,3 @@ export function CardDescription() {
     </CardStyled>
   );
 }
-
-export const TypographyStyled = styled(Typography)(({ theme }) => ({
-  display: "inline-block",
-  fontWeight: 700,
-  margin: theme.spacing(1, 0),
-}));

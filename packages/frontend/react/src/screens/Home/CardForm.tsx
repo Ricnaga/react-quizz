@@ -1,4 +1,4 @@
-import { ErrorOutline } from "@mui/icons-material";
+import { ErrorOutline } from '@mui/icons-material';
 import {
   FormControl,
   FormControlLabel,
@@ -7,9 +7,9 @@ import {
   RadioGroup,
   TextField,
   Typography,
-} from "@mui/material";
-import { ChangeEvent, SyntheticEvent } from "react";
-import { CardStyled } from "./Home";
+} from '@mui/material';
+import { ChangeEvent, SyntheticEvent } from 'react';
+import { CardStyled } from './Home';
 
 type CardFormProps = {
   name: string;
@@ -17,7 +17,7 @@ type CardFormProps = {
   onChange: (e: ChangeEvent | SyntheticEvent) => void;
 };
 
-type CardErrorMessageProps = Record<"error", string>;
+type CardErrorMessageProps = Record<'error', string>;
 
 function CardErrorMessage({ error }: CardErrorMessageProps) {
   return (
@@ -103,11 +103,11 @@ function CardUnderAge({ name, onChange, error }: CardFormProps) {
   const radioValue = [
     {
       value: true,
-      text: "Sim, sou maior de 18 anos",
+      text: 'Sim, sou maior de 18 anos',
     },
     {
       value: false,
-      text: "Não",
+      text: 'Não',
     },
   ];
   return (

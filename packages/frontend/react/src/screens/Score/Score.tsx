@@ -1,11 +1,34 @@
-import { Card, Grid, styled, Typography } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { api } from "../../application/api/axios";
-import logoAcreditarImg from "../../assets/logoAcreditar.png";
-import scoreImg from "../../assets/score.jpg";
+import { Card, Grid, styled, Typography } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { api } from '../../application/api/axios';
+import logoAcreditarImg from '../../assets/logoAcreditar.png';
+import scoreImg from '../../assets/score.jpg';
 
-type Reponse = Record<"nome" | "resultado", string>;
+const GridStyled = styled(Grid)(({ theme }) => ({
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(2, 20),
+  },
+}));
+
+const CardStyled = styled(Card)(({ theme }) => ({
+  display: 'grid',
+  justifyContent: 'center',
+  padding: theme.spacing(3),
+  margin: theme.spacing(1),
+}));
+
+const ImgStyled = styled('img')(({ theme }) => ({
+  margin: theme.spacing(0, 'auto', 2),
+}));
+
+const ImgScore = styled('img')(({ theme }) => ({
+  margin: theme.spacing(4, 'auto'),
+  width: '100%',
+  maxWidth: '600px',
+}));
+
+type Reponse = Record<'nome' | 'resultado', string>;
 
 export function ScoreScreen() {
   const { userId } = useParams();
@@ -16,7 +39,7 @@ export function ScoreScreen() {
       api
         .get<Reponse>(`/quiz/${userId}`)
         .then((response) => setData(response.data)),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -49,7 +72,8 @@ export function ScoreScreen() {
           <strong> cuidar urgentemente da sua Ansiedade.</strong>
         </Typography>
         <Typography align="center">
-          &#175; Se o total deu <strong>de 16 a 35</strong> você precisa olhar com
+          &#175; Se o total deu <strong>de 16 a 35</strong> você precisa olhar
+          com
           <strong> atenção para sua Ansiedade.</strong>
         </Typography>
         <Typography align="center">
@@ -57,34 +81,11 @@ export function ScoreScreen() {
           <strong> tem pouca de Ansiedade.</strong>
         </Typography>
         <Typography align="center">
-          &#175; Se o total deu <strong>ZERO</strong>, parabéns você tem o domínio
-          total da sua vida e ansiedade não faz parte do seu dia a dia.
+          &#175; Se o total deu <strong>ZERO</strong>, parabéns você tem o
+          domínio total da sua vida e ansiedade não faz parte do seu dia a dia.
         </Typography>
         <ImgScore src={scoreImg} />
       </CardStyled>
     </GridStyled>
   );
 }
-
-const GridStyled = styled(Grid)(({ theme }) => ({
-  [theme.breakpoints.up("sm")]: {
-    padding: theme.spacing(2, 20),
-  },
-}));
-
-const CardStyled = styled(Card)(({ theme }) => ({
-  display: "grid",
-  justifyContent: "center",
-  padding: theme.spacing(3),
-  margin: theme.spacing(1),
-}));
-
-const ImgStyled = styled("img")(({ theme }) => ({
-  margin: theme.spacing(0, "auto", 2),
-}));
-
-const ImgScore = styled("img")(({ theme }) => ({
-  margin: theme.spacing(4, "auto"),
-  width: "100%",
-  maxWidth: "600px",
-}));

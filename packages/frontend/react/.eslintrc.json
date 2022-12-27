@@ -43,7 +43,8 @@
     "react/react-in-jsx-scope": "off",
     "no-shadow": "off",
     "camelcase": "off",
-    "react/button-has-type": "off"
+    "react/button-has-type": "off",
+    "consistent-return": "off"
   },
   "settings": {
     "import/resolver": {

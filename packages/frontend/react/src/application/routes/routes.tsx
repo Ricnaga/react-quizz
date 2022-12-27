@@ -1,8 +1,8 @@
-import { Route, Routes } from "react-router-dom";
-import { HomeScreen } from "../../screens/Home/Home";
-import { QuestionsFormScreen } from "../../screens/Questions/QuestionsForm";
-import { ScoreScreen } from "../../screens/Score/Score";
-import { HOME, QUESTIONS, SCORE_BYID } from "./paths";
+import { Route, Routes } from 'react-router-dom';
+import { HomeScreen } from '../../screens/Home/Home';
+import { QuestionsFormScreen } from '../../screens/Questions/QuestionsForm';
+import { ScoreScreen } from '../../screens/Score/Score';
+import { HOME, QUESTIONS, SCORE_BYID } from './paths';
 
 export function RoutesPages() {
   return (
