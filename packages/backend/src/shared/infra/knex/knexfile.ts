@@ -1,4 +1,5 @@
 import { knex, Knex } from 'knex';
+import { join } from 'path';
 
 type KnexConfig = Record<'development', Knex.Config>;
 
@@ -12,13 +13,21 @@ const mysql2Config: KnexConfig = {
       password: 'root',
       database: 'db_quiz',
     },
+    migrations: {
+      tableName: 'knex_migrations',
+      extension: 'ts',
+      directory: join(process.cwd(), 'migrations'),
+    },
   },
 };
 
-export const knexQuery = () => knex(mysql2Config.development);
+const knexQuery = () => knex(mysql2Config.development);
 
-export const initKnexDB = () =>
+const initKnexDB = () =>
   knexQuery()
     .raw('SELECT NOW();')
     .then(() => console.log(`\t-> DATABASE:\t\x1b[32mONLINE\n\t\n`))
     .catch(() => console.log(`\t\x1b[37m-> DATABASE:\t\x1b[31mOFFLINE\n\t\n`));
+
+export default mysql2Config.development;
+export { initKnexDB, knexQuery };

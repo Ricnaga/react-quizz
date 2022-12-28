@@ -8,3 +8,10 @@ CREATE DATABASE db_quiz;
 
 UPDATE mysql.user SET host='%' WHERE user='root';
 FLUSH PRIVILEGES;
+
+show databases;
+use db_quiz;
+show tables;
+show columns from db_quiz.users;
+show columns from db_quiz.quiz;
+select * from db_quiz.users, db_quiz.quiz;
