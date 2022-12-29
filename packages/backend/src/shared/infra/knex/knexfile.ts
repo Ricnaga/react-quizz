@@ -30,8 +30,8 @@ const knexQuery = () => knex(mysql2Config.development);
 const initKnexDB = () =>
   knexQuery()
     .raw('SELECT NOW();')
-    .then(() => console.log(`\t-> DATABASE:\t\x1b[32mONLINE\n\t\n`))
-    .catch(() => console.log(`\t\x1b[37m-> DATABASE:\t\x1b[31mOFFLINE\n\t\n`));
+    .then(() => console.log(`\t\x1b[37m-> DATABASE:\t\x1b[32mONLINE`))
+    .catch(() => console.log(`\t\x1b[37m-> DATABASE:\t\x1b[31mOFFLINE`));
 
 export default mysql2Config.development;
 export { initKnexDB, knexQuery };
