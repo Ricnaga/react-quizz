@@ -6,7 +6,11 @@ export async function up(knex: Knex): Promise<void> {
   return knex.schema.hasTable(tableName).then(() =>
     knex.schema.createTable(tableName, (table) => {
       table.increments('id', { primaryKey: true }).notNullable();
-      table.uuid('userId', { primaryKey: true }).notNullable();
+      table
+        .uuid('userId', { primaryKey: true })
+        .index()
+        .notNullable()
+        .defaultTo(knex.raw('(UUID())'));
       table.string('nome');
       table.string('email');
       table.string('telefone');
