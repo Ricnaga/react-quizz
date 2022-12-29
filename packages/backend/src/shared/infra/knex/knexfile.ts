@@ -18,6 +18,10 @@ const mysql2Config: KnexConfig = {
       extension: 'ts',
       directory: join(process.cwd(), 'migrations'),
     },
+    seeds: {
+      extension: 'ts',
+      directory: join(process.cwd(), 'seeds'),
+    },
   },
 };
 
