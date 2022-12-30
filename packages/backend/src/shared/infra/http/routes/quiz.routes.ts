@@ -1,12 +1,16 @@
-import { ListResultadoController } from '@modules/quiz/infra/http/controllers/ListResultadoController';
+import { ListResultadoByIdController } from '@modules/quiz/infra/http/controllers/ListResultadoByIdController';
 import { FastifyInstance } from 'fastify';
 
-const listResultadoController = new ListResultadoController();
+const listResultadoByIdController = new ListResultadoByIdController();
+
+export type GetByIdParams = { Params: { userId: string } };
+type GetByIdReply = { Reply: Record<'nome' | 'resultado', string> };
 
 export const quizRoutes = async (app: FastifyInstance) => {
-  app.get(
+  app.get<GetByIdParams & GetByIdReply>(
     '/:userId',
-    listResultadoController.schema(),
-    async (request, reply) => listResultadoController.handler(request, reply),
+    listResultadoByIdController.schema(),
+    async (request, reply) =>
+      listResultadoByIdController.handler(request, reply),
   );
 };

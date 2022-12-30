@@ -29,4 +29,7 @@ app
     .listen({ port: PORT })
     .then(() => initMessage(PORT, PrefixRoutes.SWAGGER))
     .then(() => initKnexDB())
-    .catch((error) => process.exit(error)))();
+    .catch((error) => {
+      app.log.error(error);
+      process.exit(error);
+    }))();

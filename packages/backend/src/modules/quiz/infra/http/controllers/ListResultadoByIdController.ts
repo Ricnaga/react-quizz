@@ -1,6 +1,9 @@
+import { ListResultadoByIdRules } from '@modules/quiz/rules/ListResultadoByIdRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
-export class ListResultadoController {
+import { GetByIdParams } from '@shared/infra/http/routes';
+
+export class ListResultadoByIdController {
   schema(): RouteShorthandOptions {
     return {
       schema: {
@@ -30,10 +33,14 @@ export class ListResultadoController {
     };
   }
 
-  async handler(request: FastifyRequest, reply: FastifyReply) {
-    return reply.send({
-      nome: 'Fulano',
-      resultado: '12',
-    });
+  async handler(request: FastifyRequest<GetByIdParams>, reply: FastifyReply) {
+    try {
+      const listResultadoByIdRules = new ListResultadoByIdRules();
+      const user = await listResultadoByIdRules.execute(request.params.userId);
+
+      return reply.send(user);
+    } catch (error) {
+      return reply.code(400).send(error);
+    }
   }
 }

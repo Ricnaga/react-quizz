@@ -1,8 +1,9 @@
+import { CreateUserRules } from '@modules/user/rules/CreateUserRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
-import { UserRequestBody } from '@shared/infra/http/routes';
+import { PostRequestBody } from '@shared/infra/http/routes';
 
-export class CreateUser {
+export class CreateUserController {
   schema(): RouteShorthandOptions {
     return {
       schema: {
@@ -30,10 +31,17 @@ export class CreateUser {
   }
 
   async handler(
-    { body }: FastifyRequest<UserRequestBody>,
+    { body }: FastifyRequest<PostRequestBody>,
     reply: FastifyReply,
   ) {
-    const { email, nome, whatsapp } = body;
-    return reply.send({ id: '221' });
+    try {
+      const { email, nome, whatsapp } = body;
+      const createUserRules = new CreateUserRules();
+      const userId = await createUserRules.execute({ email, nome, whatsapp });
+
+      return reply.send(userId);
+    } catch (error) {
+      return reply.code(404).send(error);
+    }
   }
 }
