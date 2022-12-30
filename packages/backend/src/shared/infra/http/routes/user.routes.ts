@@ -1,38 +1,13 @@
+import { CreateUser } from '@modules/user/infra/http/controllers/CreateUser';
 import { FastifyInstance } from 'fastify';
 
-type UserRequestBody = {
+export type UserRequestBody = {
   Body: Record<'email' | 'nome' | 'whatsapp', string>;
 };
 
-export const userRoutes = async (app: FastifyInstance) =>
-  app.post<UserRequestBody>(
-    '/',
-    {
-      schema: {
-        description: 'post some data',
-        tags: ['User'],
-        body: {
-          type: 'object',
-          properties: {
-            nome: { type: 'string' },
-            telefone: { type: 'string' },
-            email: { type: 'string', format: 'email' },
-          },
-        },
-        response: {
-          201: {
-            description: 'Created',
-            type: 'object',
-            properties: {
-              id: { type: 'string' },
-            },
-          },
-        },
-      },
-    },
-    ({ body }, response) => {
-      const { email, nome, whatsapp } = body;
+const createUser = new CreateUser();
 
-      return response.send({ id: '221' });
-    },
+export const userRoutes = async (app: FastifyInstance) =>
+  app.post<UserRequestBody>('/', createUser.schema(), (request, reply) =>
+    createUser.handler(request, reply),
   );

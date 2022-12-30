@@ -1,38 +1,12 @@
+import { ListResultadoController } from '@modules/quiz/infra/http/controllers/ListResultadoController';
 import { FastifyInstance } from 'fastify';
+
+const listResultadoController = new ListResultadoController();
 
 export const quizRoutes = async (app: FastifyInstance) => {
   app.get(
     '/:userId',
-    {
-      schema: {
-        tags: ['Quiz'],
-        summary: 'Resultado do quiz',
-        description: 'Retorna nome e resultado do quiz',
-        params: {
-          type: 'object',
-          properties: {
-            userId: {
-              type: 'string',
-              description: 'userId',
-            },
-          },
-        },
-        response: {
-          200: {
-            description: 'OK',
-            type: 'object',
-            properties: {
-              nome: { type: 'string' },
-              resultado: { type: 'string' },
-            },
-          },
-        },
-      },
-    },
-    (request, response) =>
-      response.send({
-        nome: 'Fulano',
-        resultado: '12',
-      }),
+    listResultadoController.schema(),
+    async (request, reply) => listResultadoController.handler(request, reply),
   );
 };
