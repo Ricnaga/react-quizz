@@ -1,7 +1,9 @@
 import { ListResultadoByIdRules } from '@modules/quiz/rules/ListResultadoByIdRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
-import { GetByIdParams } from '@shared/infra/http/routes';
+export interface ListResultadoByIdControllerRequest {
+  Params: { userId: string };
+}
 
 export class ListResultadoByIdController {
   schema(): RouteShorthandOptions {
@@ -33,7 +35,10 @@ export class ListResultadoByIdController {
     };
   }
 
-  async handler(request: FastifyRequest<GetByIdParams>, reply: FastifyReply) {
+  async handler(
+    request: FastifyRequest<ListResultadoByIdControllerRequest>,
+    reply: FastifyReply,
+  ) {
     try {
       const listResultadoByIdRules = new ListResultadoByIdRules();
       const user = await listResultadoByIdRules.execute(request.params.userId);
