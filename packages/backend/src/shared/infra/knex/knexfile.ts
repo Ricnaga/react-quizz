@@ -1,6 +1,8 @@
 import { knex, Knex } from 'knex';
 import { join } from 'path';
 
+export type KnexEntity<T> = Omit<T, 'Model' | 'className'>;
+
 type KnexConfig = Record<'development', Knex.Config>;
 
 const mysql2Config: KnexConfig = {
