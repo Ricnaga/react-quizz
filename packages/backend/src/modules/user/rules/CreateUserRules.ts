@@ -1,6 +1,6 @@
 import { UserRepository } from '../infra/knex/repositories/UserRepository';
 
-type ICreateUserRules = Record<'email' | 'nome' | 'whatsapp', string>;
+type ICreateUserRules = Record<'email' | 'nome' | 'telefone', string>;
 
 export class CreateUserRules {
   async execute(user: ICreateUserRules) {
@@ -8,11 +8,13 @@ export class CreateUserRules {
 
     const findByEmail = await userRepository.findByEmail(user.email);
 
-    if (!findByEmail)
-      throw new Error('Erro: Não foi possível localizar esse email !');
+    if (user.email === findByEmail?.email)
+      throw new Error('Erro: Usuário ja cadastrado');
+
+    const userId = await userRepository.create(user);
 
     return {
-      id: '2222222',
+      id: userId,
     };
   }
 }
