@@ -1,6 +1,8 @@
+export const QUIZ_TABLE_NAME = 'quiz';
+
 export class Quiz {
   id: string;
-  userId: string;
+  user_id: string;
   resultado: string;
   created_at: Date;
 

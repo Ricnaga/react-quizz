@@ -27,6 +27,13 @@ export class CreateUserController {
               id: { type: 'string' },
             },
           },
+          404: {
+            description: 'Created',
+            type: 'object',
+            properties: {
+              message: { type: 'string' },
+            },
+          },
         },
       },
     };

@@ -1,3 +1,5 @@
+export const USER_TABLE_NAME = 'users';
+
 export class User {
   id: string;
   nome: string;

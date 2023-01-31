@@ -2,12 +2,15 @@ import {
   ListResultadoByIdController,
   ListResultadoByIdControllerRequest,
 } from '@modules/quiz/infra/http/controllers/ListResultadoByIdController';
+import { Quiz } from '@modules/quiz/infra/knex/entities/Quiz';
 import { FastifyInstance } from 'fastify';
+
+import { KnexEntity } from '@shared/infra/knex/knexfile';
 
 const listResultadoByIdController = new ListResultadoByIdController();
 
 interface IQuizList extends ListResultadoByIdControllerRequest {
-  Reply: Record<'nome' | 'resultado', string>;
+  Reply: KnexEntity<Quiz>;
 }
 
 export const quizRoutes = async (app: FastifyInstance) => {

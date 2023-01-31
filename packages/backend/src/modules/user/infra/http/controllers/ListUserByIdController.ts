@@ -1,17 +1,15 @@
-import { ListResultadoByIdRules } from '@modules/quiz/rules/ListResultadoByIdRules';
+import { ListUserByIdRules } from '@modules/user/rules/ListUserByIdRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
-export interface ListResultadoByIdControllerRequest {
+export interface ListUserByIdControllerRequest {
   Params: { userId: string };
 }
 
-export class ListResultadoByIdController {
+export class ListUserByIdController {
   schema(): RouteShorthandOptions {
     return {
       schema: {
-        tags: ['Quiz'],
-        summary: 'Resultado do quiz',
-        description: 'Retorna nome e resultado do quiz',
+        tags: ['User'],
         params: {
           type: 'object',
           properties: {
@@ -28,11 +26,13 @@ export class ListResultadoByIdController {
             properties: {
               id: { type: 'string' },
               user_id: { type: 'string' },
-              resultado: { type: 'string' },
+              nome: { type: 'string' },
+              email: { type: 'string' },
+              telefone: { type: 'string' },
               created_at: { type: 'string' },
             },
           },
-          400: {
+          404: {
             description: 'Bad Request',
             type: 'object',
             properties: {
@@ -45,16 +45,15 @@ export class ListResultadoByIdController {
   }
 
   async handler(
-    request: FastifyRequest<ListResultadoByIdControllerRequest>,
+    request: FastifyRequest<ListUserByIdControllerRequest>,
     reply: FastifyReply,
   ) {
     try {
-      const listResultadoByIdRules = new ListResultadoByIdRules();
-      const quiz = await listResultadoByIdRules.execute(request.params.userId);
-
-      return reply.send(quiz);
+      const listUserByIdController = new ListUserByIdRules();
+      const user = await listUserByIdController.execute(request.params.userId);
+      return reply.send(user);
     } catch (error) {
-      return reply.code(400).send(error);
+      return reply.code(404).send(error);
     }
   }
 }

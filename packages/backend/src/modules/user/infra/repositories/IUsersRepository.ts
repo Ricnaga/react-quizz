@@ -7,4 +7,5 @@ import { User } from '../knex/entities/User';
 export default interface IUsersRepository {
   findByEmail(email: string): Promise<KnexEntity<User> | null>;
   create(user: ICreateUser): Promise<string | null>;
+  findByUserId(userId: string): Promise<KnexEntity<User> | undefined>;
 }
