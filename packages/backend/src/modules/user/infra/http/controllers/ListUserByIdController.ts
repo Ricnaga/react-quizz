@@ -10,6 +10,8 @@ export class ListUserByIdController {
     return {
       schema: {
         tags: ['User'],
+        summary: 'Listar um usuário',
+        description: 'Listar um usuário',
         params: {
           type: 'object',
           properties: {

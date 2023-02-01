@@ -9,7 +9,8 @@ export class CreateUserController {
   schema(): RouteShorthandOptions {
     return {
       schema: {
-        description: 'post some data',
+        summary: 'Criar um usuário',
+        description: 'Cria um usuário',
         tags: ['User'],
         body: {
           type: 'object',

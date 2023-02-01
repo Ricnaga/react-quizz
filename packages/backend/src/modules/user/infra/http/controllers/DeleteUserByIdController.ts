@@ -10,6 +10,8 @@ export class DeleteUserByIdController {
     return {
       schema: {
         tags: ['User'],
+        summary: 'Apagar um usuário',
+        description: 'Remove um usuário',
         params: {
           type: 'object',
           properties: {

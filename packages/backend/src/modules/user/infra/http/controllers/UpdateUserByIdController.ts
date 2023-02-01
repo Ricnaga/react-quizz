@@ -11,6 +11,8 @@ export class UpdateUserByIdController {
     return {
       schema: {
         tags: ['User'],
+        summary: 'Atualizar usuário',
+        description: 'Atualiza informações de um detemrinado usuário',
         params: {
           type: 'object',
           properties: {

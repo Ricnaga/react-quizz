@@ -10,8 +10,8 @@ export class ListQuizByIdController {
     return {
       schema: {
         tags: ['Quiz'],
-        summary: 'Resultado do quiz',
-        description: 'Retorna nome e resultado do quiz',
+        summary: 'Listar quiz',
+        description: 'Retorna dados referente ao quiz do usuário',
         params: {
           type: 'object',
           properties: {

@@ -10,7 +10,7 @@ export class CreateQuizByIdController {
     return {
       schema: {
         tags: ['Quiz'],
-        summary: 'Resultado do quiz',
+        summary: 'Criar um quiz',
         description: 'Cria um resultado',
         body: {
           type: 'object',

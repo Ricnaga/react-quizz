@@ -1,6 +1,5 @@
 import { PORT } from '@config/environment';
 import { fastifyCors } from '@fastify/cors';
-import { initMessage } from '@utils';
 import { fastify } from 'fastify';
 
 import { initKnexDB } from '../knex/knexfile';
@@ -27,7 +26,11 @@ app
 (async () =>
   app
     .listen({ port: PORT })
-    .then(() => initMessage(PORT, PrefixRoutes.SWAGGER))
+    .then(() =>
+      console.log(
+        `\n\t-> Backend is \t\x1b[32mONLINE\n\t\x1b[37m-> Local:\t\x1b[35mhttp://localhost:${PORT}/${PrefixRoutes.SWAGGER}`,
+      ),
+    )
     .then(() => initKnexDB())
     .catch((error) => {
       app.log.error(error);
