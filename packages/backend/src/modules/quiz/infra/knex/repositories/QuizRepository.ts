@@ -1,9 +1,11 @@
+import { BaseRepository } from '@utils/BaseRepository';
+
 import { KnexEntity, knexQuery } from '@shared/infra/knex/knexfile';
 
 import IQuizRepository from '../../repositories/IQuizRepository';
 import { Quiz } from '../entities/Quiz';
 
-export class QuizRepository implements IQuizRepository {
+export class QuizRepository extends BaseRepository implements IQuizRepository {
   async findByUserId(userId: string): Promise<KnexEntity<Quiz> | undefined> {
     const quiz = await knexQuery()
       .select()
@@ -11,7 +13,11 @@ export class QuizRepository implements IQuizRepository {
       .where({ user_id: userId })
       .then((response) => response[0]);
 
-    return quiz;
+    return {
+      ...quiz,
+      id: this.setGlobalId(quiz.id),
+      user_id: this.setGlobalId(quiz.user_id),
+    };
   }
 
   async create(resultado: string): Promise<void> {
@@ -19,13 +25,12 @@ export class QuizRepository implements IQuizRepository {
   }
 
   async delete(userId: string): Promise<void> {
-    await knexQuery().delete().table('quiz').where({ user_id: userId });
+    const user_id = this.setLocalId(userId);
+    await knexQuery().delete().table('quiz').where({ user_id });
   }
 
   async update(userId: string, resultado: string): Promise<void> {
-    await knexQuery()
-      .update(resultado)
-      .table('quiz')
-      .where({ user_id: userId });
+    const user_id = this.setLocalId(userId);
+    await knexQuery().update(resultado).table('quiz').where({ user_id });
   }
 }

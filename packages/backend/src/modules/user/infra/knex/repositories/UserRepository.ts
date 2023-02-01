@@ -1,12 +1,13 @@
 import { ICreateUser } from '@modules/user/dtos/ICreateUserDTO';
 import { IUpdateUserDTO } from '@modules/user/dtos/IUpdateUserDTO';
+import { BaseRepository } from '@utils/BaseRepository';
 
 import { KnexEntity, knexQuery } from '@shared/infra/knex/knexfile';
 
 import IUsersRepository from '../../repositories/IUsersRepository';
 import { User } from '../entities/User';
 
-export class UserRepository implements IUsersRepository {
+export class UserRepository extends BaseRepository implements IUsersRepository {
   public async create(user: ICreateUser): Promise<string | null> {
     const createUser = (await knexQuery()
       .insert(user)
@@ -28,17 +29,19 @@ export class UserRepository implements IUsersRepository {
   }
 
   async findByUserId(userId: string): Promise<KnexEntity<User> | undefined> {
+    const id = this.setLocalId(userId);
     const user = await knexQuery()
       .select()
       .table('users')
-      .where({ id: userId })
+      .where({ id })
       .then((response) => response[0]);
 
-    return user;
+    return { ...user, id: this.setGlobalId(user.id) };
   }
 
   async delete(userId: string): Promise<void> {
-    await knexQuery().delete().table('users').where({ id: userId });
+    const id = this.setLocalId(userId);
+    await knexQuery().delete().table('users').where({ id });
   }
 
   async update(user: IUpdateUserDTO): Promise<void> {
