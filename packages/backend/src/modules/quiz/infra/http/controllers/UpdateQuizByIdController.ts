@@ -1,12 +1,12 @@
 import { UpdateQuizByIdRules } from '@modules/quiz/rules/UpdateQuizByIdRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
-export interface UpdateResultadoByIdControllerRequest {
+export interface UpdateQuizByIdControllerRequest {
   Params: { userId: string };
   Body: { resultado: string };
 }
 
-export class UpdateResultadoByIdController {
+export class UpdateQuizByIdController {
   schema(): RouteShorthandOptions {
     return {
       schema: {
@@ -49,7 +49,7 @@ export class UpdateResultadoByIdController {
   }
 
   async handler(
-    request: FastifyRequest<UpdateResultadoByIdControllerRequest>,
+    request: FastifyRequest<UpdateQuizByIdControllerRequest>,
     reply: FastifyReply,
   ) {
     const { userId } = request.params;
