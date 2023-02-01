@@ -35,4 +35,14 @@ export class UserRepository implements IUsersRepository {
 
     return user;
   }
+
+  async delete(userId: string): Promise<void> {
+    await knexQuery().delete().table(USER_TABLE_NAME).where({ id: userId });
+  }
+
+  async update(
+    user: KnexEntity<Omit<User, 'Model' | 'className' | 'created_at'>>,
+  ): Promise<void> {
+    await knexQuery().delete().table(USER_TABLE_NAME).where(user);
+  }
 }
