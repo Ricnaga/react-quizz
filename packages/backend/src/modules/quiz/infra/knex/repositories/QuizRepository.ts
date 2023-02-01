@@ -1,16 +1,31 @@
 import { KnexEntity, knexQuery } from '@shared/infra/knex/knexfile';
 
 import IQuizRepository from '../../repositories/IQuizRepository';
-import { Quiz, QUIZ_TABLE_NAME } from '../entities/Quiz';
+import { Quiz } from '../entities/Quiz';
 
 export class QuizRepository implements IQuizRepository {
   async findByUserId(userId: string): Promise<KnexEntity<Quiz> | undefined> {
     const quiz = await knexQuery()
       .select()
-      .table(QUIZ_TABLE_NAME)
+      .table('quiz')
       .where({ user_id: userId })
       .then((response) => response[0]);
 
     return quiz;
+  }
+
+  async create(resultado: string): Promise<void> {
+    await knexQuery().insert(resultado).table('quiz');
+  }
+
+  async delete(userId: string): Promise<void> {
+    await knexQuery().delete().table('quiz').where({ user_id: userId });
+  }
+
+  async update(userId: string, resultado: string): Promise<void> {
+    await knexQuery()
+      .update(resultado)
+      .table('quiz')
+      .where({ user_id: userId });
   }
 }

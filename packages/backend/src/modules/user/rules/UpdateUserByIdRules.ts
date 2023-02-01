@@ -37,7 +37,7 @@ export class UpdateUserByIdRules {
       throw new Error('Erro! Necessário um telefone válido');
     }
 
-    await this.userRepository.update(user);
+    await this.userRepository.update({ user });
 
     return user;
   }

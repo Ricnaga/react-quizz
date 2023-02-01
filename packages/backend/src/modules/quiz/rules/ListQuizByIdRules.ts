@@ -3,7 +3,7 @@ import { KnexEntity } from '@shared/infra/knex/knexfile';
 import { Quiz } from '../infra/knex/entities/Quiz';
 import { QuizRepository } from '../infra/knex/repositories/QuizRepository';
 
-export class ListResultadoByIdRules {
+export class ListQuizByIdRules {
   quizRepository: QuizRepository;
 
   constructor() {

@@ -1,9 +1,10 @@
 import { ICreateUser } from '@modules/user/dtos/ICreateUserDTO';
+import { IUpdateUserDTO } from '@modules/user/dtos/IUpdateUserDTO';
 
 import { KnexEntity, knexQuery } from '@shared/infra/knex/knexfile';
 
 import IUsersRepository from '../../repositories/IUsersRepository';
-import { User, USER_TABLE_NAME } from '../entities/User';
+import { User } from '../entities/User';
 
 export class UserRepository implements IUsersRepository {
   public async create(user: ICreateUser): Promise<string | null> {
@@ -29,7 +30,7 @@ export class UserRepository implements IUsersRepository {
   async findByUserId(userId: string): Promise<KnexEntity<User> | undefined> {
     const user = await knexQuery()
       .select()
-      .table(USER_TABLE_NAME)
+      .table('users')
       .where({ id: userId })
       .then((response) => response[0]);
 
@@ -37,12 +38,10 @@ export class UserRepository implements IUsersRepository {
   }
 
   async delete(userId: string): Promise<void> {
-    await knexQuery().delete().table(USER_TABLE_NAME).where({ id: userId });
+    await knexQuery().delete().table('users').where({ id: userId });
   }
 
-  async update(
-    user: KnexEntity<Omit<User, 'Model' | 'className' | 'created_at'>>,
-  ): Promise<void> {
-    await knexQuery().delete().table(USER_TABLE_NAME).where(user);
+  async update(user: IUpdateUserDTO): Promise<void> {
+    await knexQuery().where(user).update(user).table('users');
   }
 }

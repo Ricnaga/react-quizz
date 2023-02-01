@@ -1,17 +1,17 @@
-import { ListResultadoByIdRules } from '@modules/quiz/rules/ListResultadoByIdRules';
+import { DeleteQuizByIdRules } from '@modules/quiz/rules/DeleteQuizByIdRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
-export interface ListResultadoByIdControllerRequest {
+export interface DeleteQuizByIdControllerRequest {
   Params: { userId: string };
 }
 
-export class ListResultadoByIdController {
+export class DeleteQuizByIdController {
   schema(): RouteShorthandOptions {
     return {
       schema: {
         tags: ['Quiz'],
-        summary: 'Resultado do quiz',
-        description: 'Retorna nome e resultado do quiz',
+        summary: 'Apagar quiz',
+        description: 'Apagar um resultado baseado num userId',
         params: {
           type: 'object',
           properties: {
@@ -27,9 +27,6 @@ export class ListResultadoByIdController {
             type: 'object',
             properties: {
               id: { type: 'string' },
-              user_id: { type: 'string' },
-              resultado: { type: 'string' },
-              created_at: { type: 'string' },
             },
           },
           400: {
@@ -45,12 +42,12 @@ export class ListResultadoByIdController {
   }
 
   async handler(
-    request: FastifyRequest<ListResultadoByIdControllerRequest>,
+    request: FastifyRequest<DeleteQuizByIdControllerRequest>,
     reply: FastifyReply,
   ) {
     try {
-      const listResultadoByIdRules = new ListResultadoByIdRules();
-      const quiz = await listResultadoByIdRules.execute(request.params.userId);
+      const deleteQuizByIdRules = new DeleteQuizByIdRules();
+      const quiz = await deleteQuizByIdRules.execute(request.params.userId);
 
       return reply.send(quiz);
     } catch (error) {
