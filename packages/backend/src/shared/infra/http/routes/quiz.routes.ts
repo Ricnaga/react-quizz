@@ -29,7 +29,7 @@ interface IQuizList extends ListQuizByIdControllerRequest {
 }
 
 interface IQuizCreate extends CreateQuizControllerRequest {
-  Reply: KnexEntity<Quiz>;
+  Reply: { message: string };
 }
 
 interface IQuizUpdateById extends UpdateQuizByIdControllerRequest {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HOME, SCORE } from 'src/app/app-routing.module';
-import { answers, questions } from 'src/app/data/constants';
+import { answers } from 'src/app/data/constants';
+import { QuestionsType } from './questions.interface';
 import { QuestionsService } from './services/questions/questions.service';
 
 const PAGE_SIZE = 1;
@@ -12,27 +13,31 @@ const PAGE_SIZE = 1;
 })
 export class QuestionsComponent implements OnInit {
   pageNumber = '0';
-  questionNumber = 0;
-  paginateQuestions = new Array<string>();
+  paginateQuestions: Array<QuestionsType>;
+  user: Record<'email' | 'nome' | 'telefone', string>;
 
-  answervalue = answers.map((answer, index) => ({
-    text: answer,
-    value: index,
-  }));
+  answervalue = answers;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private questionsService: QuestionsService,
-  ) {}
+  ) {
+    this.user = {
+      email: this.activatedRoute.snapshot.queryParams['email'],
+      nome: this.activatedRoute.snapshot.queryParams['nome'],
+      telefone: this.activatedRoute.snapshot.queryParams['telefone'],
+    };
+  }
 
   set nextQuestion(nextPageNumber: number) {
     const initialQuestion = nextPageNumber * PAGE_SIZE;
     const currentQuestion = initialQuestion + PAGE_SIZE;
 
-    this.questionNumber = nextPageNumber;
-
-    this.paginateQuestions = questions.slice(initialQuestion, currentQuestion);
+    this.paginateQuestions = this.questionsService.questions.slice(
+      initialQuestion,
+      currentQuestion,
+    );
   }
 
   ngOnInit() {
@@ -41,6 +46,10 @@ export class QuestionsComponent implements OnInit {
     });
 
     this.nextQuestion = parseInt(this.pageNumber, 10);
+  }
+
+  onChange(answer: number, questionNumber: number) {
+    this.questionsService.questions[questionNumber].value = answer;
   }
 
   onPrevious() {
@@ -60,8 +69,12 @@ export class QuestionsComponent implements OnInit {
 
   onNext() {
     const nextPage = parseInt(this.pageNumber, 10) + 1;
-
-    if (this.questionsService.isFinishQuestions(nextPage)) {
+    if (
+      this.questionsService.isFinishQuestions({
+        nextPage,
+        ...this.user,
+      })
+    ) {
       this.router.navigate([SCORE]);
       return;
     }
@@ -69,7 +82,10 @@ export class QuestionsComponent implements OnInit {
     this.nextQuestion = nextPage;
 
     this.router.navigate([], {
-      queryParams: { page: nextPage },
+      queryParams: {
+        page: nextPage,
+        ...this.user,
+      },
     });
   }
 }

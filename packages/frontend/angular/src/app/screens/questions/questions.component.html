@@ -2,18 +2,25 @@
   <mat-card class="card" *ngFor="let question of paginateQuestions">
     <mat-card-header>
       <p class="mat-headline-4">
-        <strong> Questionário {{ questionNumber + 1 }} (QNADE) </strong>
+        <strong>
+          Questionário {{ question.questionNumber + 1 }} (QNADE)
+        </strong>
       </p>
     </mat-card-header>
 
     <mat-card-content>
       <label>
-        <p class="mat-h1">- {{ question }}</p></label
+        <p class="mat-h1">- {{ question.title }}</p></label
       >
 
       <mat-radio-group>
-        <mat-radio-button *ngFor="let answer of answervalue" [value]="answer">
-          {{ answer.text }}
+        <mat-radio-button
+          *ngFor="let answer of answervalue; index as i"
+          [value]="i"
+          [checked]="i === question.value"
+          (change)="onChange(i, question.questionNumber)"
+        >
+          {{ answer }}
         </mat-radio-button>
       </mat-radio-group>
     </mat-card-content>
