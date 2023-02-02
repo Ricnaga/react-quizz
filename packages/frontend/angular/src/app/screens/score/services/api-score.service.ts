@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IGetQuiz } from './IGetQuiz.interface';
+import { IGetQuiz } from './api-score.interface';
 
 @Injectable({
   providedIn: 'root',

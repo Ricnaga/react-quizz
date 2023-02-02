@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiScoreService } from './services/api-score.service';
-import { IGetQuiz } from './services/IGetQuiz.interface';
+import { IGetQuiz } from './services/api-score.interface';
 
 @Component({
   templateUrl: './score.component.html',

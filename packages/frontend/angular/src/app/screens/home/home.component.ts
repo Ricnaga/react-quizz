@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { HOME, QUESTIONS } from 'src/app/app-routing.module';
-import { IFormlyValues } from './IFormlyValues.interface';
+import { IFormlyValues } from './home.interface';
 import { FieldValidatorsService } from './services/field-validators.service';
 
 @Component({
