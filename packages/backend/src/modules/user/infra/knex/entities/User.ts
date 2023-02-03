@@ -4,6 +4,7 @@ export class User {
   id: string;
   nome: string;
   email: string;
+  user_id: string;
   telefone: string;
   created_at: Date;
 

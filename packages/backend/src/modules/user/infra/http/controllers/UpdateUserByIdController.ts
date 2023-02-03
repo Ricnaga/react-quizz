@@ -59,7 +59,7 @@ export class UpdateUserByIdController {
     try {
       const updateUserByIdRules = new UpdateUserByIdRules();
       const user = await updateUserByIdRules.execute({
-        id: userId,
+        user_id: userId,
         email,
         nome,
         telefone,

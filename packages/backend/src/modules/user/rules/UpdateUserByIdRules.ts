@@ -5,7 +5,7 @@ import { UserRepository } from '../infra/knex/repositories/UserRepository';
 
 type UpdateUserByIdRulesParams = Omit<
   User,
-  'Model' | 'className' | 'created_at'
+  'Model' | 'className' | 'created_at' | 'id'
 >;
 
 type UpdateUserByIdRulesResponse = Promise<
@@ -19,7 +19,7 @@ export class UpdateUserByIdRules {
     this.userRepository = new UserRepository();
   }
   async execute(user: UpdateUserByIdRulesParams): UpdateUserByIdRulesResponse {
-    const userFound = await this.userRepository.findByUserId(user.id);
+    const userFound = await this.userRepository.findByUserId(user.user_id);
 
     if (!userFound) {
       throw new Error('Erro! Esse usuário não foi encontrado');

@@ -31,7 +31,7 @@ export class UserRepository implements IUsersRepository {
     const user = await knexQuery()
       .select()
       .table('users')
-      .where({ id: userId })
+      .where({ user_id: userId })
       .then((response) => response[0]);
 
     return user;
