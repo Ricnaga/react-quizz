@@ -28,17 +28,23 @@ const ImgScore = styled('img')(({ theme }) => ({
   maxWidth: '600px',
 }));
 
-type Reponse = Record<'nome' | 'resultado', string>;
+type ScoreScreenReponse = Record<'nome' | 'resultado', string>;
 
 export function ScoreScreen() {
   const { userId } = useParams();
-  const [data, setData] = useState<Reponse>();
+  const [data, setData] = useState<ScoreScreenReponse>();
 
   const handleGetResultado = useCallback(
     async () =>
-      api
-        .get<Reponse>(`/quiz/${userId}`)
-        .then((response) => setData(response.data)),
+      Promise.all([
+        api.get<{ nome: string }>(`/user/${userId}`),
+        api.get<{ resultado: string }>(`/quiz/${userId}`),
+      ]).then((response) =>
+        setData(() => ({
+          nome: response[0].data.nome.toUpperCase(),
+          resultado: response[1].data.resultado,
+        })),
+      ),
     [],
   );
 
@@ -51,7 +57,7 @@ export function ScoreScreen() {
       <CardStyled>
         <ImgStyled src={logoAcreditarImg} />
         <Typography variant="h6" fontWeight={700} align="center">
-          {data?.nome.toUpperCase()}, analisando suas respostas
+          {data?.nome}, analisando suas respostas
         </Typography>
         <Typography variant="h4" fontWeight={700} align="center">
           A soma total das sua respostas é

@@ -72,12 +72,6 @@ function CardName({ name, onChange, error }: CardFormProps) {
 }
 
 function CardPhone({ name, onChange, error }: CardFormProps) {
-  //   const mascaraTelefone = (valor) => {
-  //     valor = valor.replace(/\D/g, "")
-  //     valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2")
-  //     valor = valor.replace(/(\d)(\d{4})$/, "$1-$2")
-  //     tel.value = valor // Insere o(s) valor(es) no campo
-  // }
   return (
     <CardStyled>
       <TextField

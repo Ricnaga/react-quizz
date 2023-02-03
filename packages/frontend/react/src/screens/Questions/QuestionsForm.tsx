@@ -70,8 +70,9 @@ export function QuestionsFormScreen() {
       return setSearchParams({ ...queryString, page: nextPage });
     }
 
-    const data = {
+    const body = {
       ...queryString,
+      telefone: queryString.whatsapp,
       resultado: items
         .reduce(
           (accumulator, item) =>
@@ -82,7 +83,7 @@ export function QuestionsFormScreen() {
     };
 
     api
-      .post<{ id: string }>('/user', data)
+      .post<{ id: string }>('/user', body)
       .then(({ data }) => navigate(`${SCORE}/${data.id}`));
   };
 
