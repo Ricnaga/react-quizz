@@ -1,6 +1,7 @@
 <div align="center">
-<img src="./frontend.jpg" />
-<img src="./backend.jpg" />
+<img src="./cover.jpg" />
+<img src="./mobile.jpg" />
+<img src="./doc.jpg" />
 </div>
 
 <div align="center">
