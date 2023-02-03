@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 export const HOME = 'home';
 export const QUESTIONS = 'questions';
-export const SCORE = 'score';
+export const SCORE = 'score/:userId';
 
 const rootRoutes: Routes = [{ path: '', redirectTo: HOME, pathMatch: 'full' }];
 

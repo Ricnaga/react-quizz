@@ -1,4 +1,4 @@
-export class BaseRepository {
+export class BaseRules {
   setGlobalId(id: string): string {
     const bufferId = Buffer.from(id, 'utf-8');
     return bufferId.toString('base64');

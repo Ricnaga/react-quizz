@@ -1,11 +1,10 @@
 .card {
-    &__title, &__intensity {
-        margin-bottom: 1rem;
-   }
+  &__title,
+  &__intensity {
+    margin-bottom: 1rem;
+  }
 
-   &__list-title {
-       margin: 0;    
-   }
-
-
+  &__list-title {
+    margin: 0;
+  }
 }

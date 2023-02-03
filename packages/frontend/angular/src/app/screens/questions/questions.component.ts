@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HOME, SCORE } from 'src/app/app-routing.module';
 import { answers } from 'src/app/data/constants';
-import { QuestionsType } from './questions.interface';
+import { QuestionsType, User } from './questions.interface';
+import { ApiQuestionService } from './services/api/api-question.service';
 import { QuestionsService } from './services/questions/questions.service';
 
 const PAGE_SIZE = 1;
@@ -12,22 +13,26 @@ const PAGE_SIZE = 1;
   styleUrls: ['./questions.component.scss'],
 })
 export class QuestionsComponent implements OnInit {
-  pageNumber = '0';
+  pageNumber: string;
+  lastQuestion: string;
   paginateQuestions: Array<QuestionsType>;
-  user: Record<'email' | 'nome' | 'telefone', string>;
-
-  answervalue = answers;
+  user: User;
+  answervalue: Array<string>;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private questionsService: QuestionsService,
+    private apiQuestionService: ApiQuestionService,
   ) {
+    this.pageNumber = '0';
     this.user = {
       email: this.activatedRoute.snapshot.queryParams['email'],
       nome: this.activatedRoute.snapshot.queryParams['nome'],
       telefone: this.activatedRoute.snapshot.queryParams['telefone'],
     };
+    this.answervalue = answers;
+    this.lastQuestion = (this.questionsService.questions.length - 1).toString();
   }
 
   set nextQuestion(nextPageNumber: number) {
@@ -69,13 +74,16 @@ export class QuestionsComponent implements OnInit {
 
   onNext() {
     const nextPage = parseInt(this.pageNumber, 10) + 1;
-    if (
-      this.questionsService.isFinishQuestions({
-        nextPage,
-        ...this.user,
-      })
-    ) {
-      this.router.navigate([SCORE]);
+    if (this.questionsService.isFinishQuestions(nextPage)) {
+      const resultado = this.questionsService.questions
+        .reduce((acc, current) => acc + current.value, 0)
+        .toString();
+
+      this.apiQuestionService
+        .postUser({ ...this.user, resultado })
+        .subscribe(({ id }) =>
+          this.router.navigate([SCORE.replace(':userId', id)]),
+        );
       return;
     }
 
@@ -84,7 +92,6 @@ export class QuestionsComponent implements OnInit {
     this.router.navigate([], {
       queryParams: {
         page: nextPage,
-        ...this.user,
       },
     });
   }

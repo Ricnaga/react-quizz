@@ -2,7 +2,7 @@ import { CreateQuizByIdRules } from '@modules/quiz/rules/CreateQuizByIdRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
 export interface CreateQuizControllerRequest {
-  Body: Record<'resultado', string>;
+  Body: Record<'resultado' | 'userId', string>;
 }
 
 export class CreateQuizByIdController {
@@ -16,6 +16,7 @@ export class CreateQuizByIdController {
           type: 'object',
           properties: {
             resultado: { type: 'string' },
+            userId: { type: 'string' },
           },
         },
         response: {
@@ -42,10 +43,10 @@ export class CreateQuizByIdController {
     request: FastifyRequest<CreateQuizControllerRequest>,
     reply: FastifyReply,
   ) {
-    const { resultado } = request.body;
+    const { resultado, userId } = request.body;
     try {
       const createQuizByIdRules = new CreateQuizByIdRules();
-      await createQuizByIdRules.execute(resultado);
+      await createQuizByIdRules.execute(userId, resultado);
 
       return reply.send({ message: 'Quiz was successfuly created' });
     } catch (error) {

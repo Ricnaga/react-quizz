@@ -6,7 +6,7 @@ export class CreateQuizByIdRules {
   constructor() {
     this.quizRepository = new QuizRepository();
   }
-  async execute(resultado: string): Promise<void> {
-    await this.quizRepository.create(resultado);
+  async execute(userId: string, resultado: string): Promise<void> {
+    await this.quizRepository.create(userId, resultado);
   }
 }

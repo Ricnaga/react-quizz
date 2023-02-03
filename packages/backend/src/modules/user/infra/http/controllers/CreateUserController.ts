@@ -2,7 +2,7 @@ import { CreateUserRules } from '@modules/user/rules/CreateUserRules';
 import { FastifyReply, FastifyRequest, RouteShorthandOptions } from 'fastify';
 
 export interface CreateUserControllerRequest {
-  Body: Record<'email' | 'nome' | 'telefone', string>;
+  Body: Record<'email' | 'nome' | 'telefone' | 'resultado', string>;
 }
 
 export class CreateUserController {
@@ -45,12 +45,13 @@ export class CreateUserController {
     reply: FastifyReply,
   ) {
     try {
-      const { email, nome, telefone } = body;
+      const { email, nome, telefone, resultado } = body;
       const createUserRules = new CreateUserRules();
       const userId = await createUserRules.execute({
         email,
         nome,
         telefone,
+        resultado,
       });
 
       return reply.send(userId);
