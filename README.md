@@ -25,6 +25,7 @@
 
 - [Angular](https://angular.io/) - Framework frontend
     - [Material Angular](https://material.angular.io/) - UI para react
+    - [SASS](https://sass-lang.com/) - Estilização de página e components
     - [Formly](https://formly.dev/) - Manipular formulário no Angular
 
 - [Fastify](https://www.fastify.io/) - Web framework para nodejs
